@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>Zerone</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Zerone">
+<meta property="og:url" content="http://yoursite.com/index.html">
+<meta property="og:site_name" content="Zerone">
+<meta property="og:locale" content="default">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Zerone">
+  
+    <link rel="alternate" href="/atom.xml" title="Zerone" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Zerone</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-character-encoding" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/02/04/character-encoding/" class="article-date">
+  <time datetime="2019-02-04T13:15:50.000Z" itemprop="datePublished">2019-02-04</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/02/04/character-encoding/">character encoding</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="ASCII"><a href="#ASCII" class="headerlink" title="ASCII"></a>ASCII</h4><p>ASCII全称American Standard Code for Infomation Interchange,美国信息交换标准代码，使用7bit来表示一个字符，其中一位用作校验位，前0x20用来做控制字符，后边的编码用来表示26个大小写字母和标点符号等，一直编码到127。</p>
+<h4 id="ISO-8859-1"><a href="#ISO-8859-1" class="headerlink" title="ISO-8859-1"></a>ISO-8859-1</h4><p>后来计算机引进西欧，西欧国家还有其他的未编码字符，于是为了使计算机能够显示就使用了128~255共128个codepoint(码位)来编码其他字符，这套字符集叫做ISO-8859-1，兼容前边的0~127个codepoint，也就是ASCII。</p>
+<h4 id="GB2312"><a href="#GB2312" class="headerlink" title="GB2312"></a>GB2312</h4><p>与此同时中国也引入了计算机，但是中国的象形文字有几千个，使用1byte所能表示的信息量不够用来编码中国的汉字，所以中国使用更大的数字来编码汉字一开始使用1000 0000 1000 0000(0x7070)从此开始递增的codepoint来编码汉字，这套字符集叫做GB2312，兼容ASCII。</p>
+<h4 id="GBK"><a href="#GBK" class="headerlink" title="GBK"></a>GBK</h4><p>后来因为一些生僻字不够表示，所以放开了后一个字节的小于128的编码，所以可以使用从1000 0000 0000 0000(0x7000)从此开始递增的codepoint来编码汉字，这套字符集叫做GBK，兼容GB2312。</p>
+<h4 id="GB18030"><a href="#GB18030" class="headerlink" title="GB18030"></a>GB18030</h4><p>再后来少数民族也有很多他们自己的文字符号，继续在GBK上扩充把剩余的未使用的codepoint进行编码，至此完整的包含中国全部汉字的编码集产生，即GB18030使用GB18030解码的方法是遇到小于128的直接按照ASCII码解码，大于128的则取两个字节按照GB18030字符集解码.</p>
+<h4 id="Unicode"><a href="#Unicode" class="headerlink" title="Unicode"></a>Unicode</h4><p>除了中国，其他国家和地区都有自己的文字，比如日本、韩国和中国的台湾等等，他们都自己制订一套适用于自己的编码集，如台湾使用Big5，这造成多个地区或国家信息交换的不方便，于是ISO组织决定重新编码一套包含地球上全部文字符号的编码集UCS(Universal Character Set),也叫Unicode，该编码集使用两个字节来表示一个字符，ASCII和ISO-8859-1的高位字节用0填充，汉字等其他象形文字重新编码，至此字符集统一。</p>
+<h4 id="UTF-8"><a href="#UTF-8" class="headerlink" title="UTF-8"></a>UTF-8</h4><p>但是可以发现ASCII码用一个字节就可以表示的信息，现在使用unicode不得不使用两个字节来表示，对于英语文本的信息极大地浪费了存储空间和传输带框，所以出现了utf-8编码规则，把unicode字符集按数字大小分类，按照utf-8的规则编码，utf-8完全兼容ascii和iso-8859-1的编码规则，所以在使用以英文或西欧字符集的文本上极大地节省内存空间，但是utf-8表示汉字时使用3个字节，相比于GB18030多一个字节，所以在确定软件使用对象是使用汉字字符集的情况下使用GB18030是一种很好的选择。UTF-8编码字符时可能使用1~6个字节，另外对于UTF-16是最小使用两个字节表示字符，使用此编码是为了提高处理能力，英文字符浪费一倍空间，相当于空间换时间UTF-32是为了扩展保留。</p>
+<p><em>注：ASCII、ISO-8859-1、GB2312、GBK、GB18030、Unicode都叫做字符集，即使字符信息可以数字化表示的映射，比如1<->a  2<->b 3<->c等等，我们可以使用将1、2、3直接对应到计算机的字节中这种编码规则来使计算机能够存储、处理。因为ASCII字符集的编码规则就是使用数字的二进制直接映射到计算机字节中,假如ASCII中的c<->30000,那么肯定不能用1个字节来表示；一般的情况下编码规则是直接使用字符集对应的数字直接映射到计算机中的字节来处理字符，但是unicode如果直接像ASCII、ISO、GB18030这些字符集方式编码会存在浪费资源，所以unicode才出现了不同的编码规则如utf-8，如果把utf-8对应的字节理解成数字的话，那么相当于本来0xF1F1<->好,utf-8编码过后0xE18080<->好。因为unicode包罗万象，但是统一，统一就意味着处理方便，如果一味的考虑空间效率，可能使得处理方式变得纷繁复杂，那就是另一种极端了,所谓鱼和熊掌不可兼得，时间和空间需要根据具体的业务场景来权衡。</-></-></-></-></-></-></em></p>
+<p>utf-8编码规则如下：第一个字节1的个数代表了后边多少个字节组成一个字符编码</p>
+<ul>
+<li>0xxxxxxx</li>
+<li>110xxxxx 10xxxxxx</li>
+<li>1110xxxx 10xxxxxx 10xxxxxx</li>
+<li>11110xxx 10xxxxxx 10xxxxxx 10xxxxxx</li>
+<li>111110xx 10xxxxxx 10xxxxxx 10xxxxxx 10xxxxxx</li>
+<li>1111110x 10xxxxxx 10xxxxxx 10xxxxxx 10xxxxxx 10xxxxxx</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/02/04/character-encoding/" data-id="cjrqcy0sf0000rcpvwbgxat7i" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Hexo-Install" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/02/03/Hexo-Install/" class="article-date">
+  <time datetime="2019-02-03T11:20:00.000Z" itemprop="datePublished">2019-02-03</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/02/03/Hexo-Install/">Hexo Install</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="hexo介绍"><a href="#hexo介绍" class="headerlink" title="hexo介绍"></a>hexo介绍</h4><p><a href="https://hexo.io" target="_blank" rel="noopener">hexo</a>是一个快速、简洁且高效的博客框架</p>
+<h4 id="虚拟机安装"><a href="#虚拟机安装" class="headerlink" title="虚拟机安装"></a>虚拟机安装</h4><ol>
+<li>使用virtualbox创建虚拟机，类型选择Linux，版本选择Red Hat（64-bit）<br>图片</li>
+<li>进入<a href="https://www.centos.org" target="_blank" rel="noopener">centos官网</a>下载最新的64位iso镜像，我下载的是CentOS-7-x86_64-Minimal-1810.iso</li>
+<li>网络选择桥接模式，光驱中选择刚下载的iso文件，启动虚拟机，直接安装，时间选择一下其余默认，并为root用户设置一个密码<br>图片</li>
+<li>编辑网卡配置文件<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ vi /etc/sysconfig/network-scripts/ifcfg-eth0</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>图片</p>
+<ol start="5">
+<li><p>重启网卡</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ service network restart</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>查看网络是否可用</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ping www.baidu.com</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>设置静态地址（可选）<br>图片</p>
+</li>
+<li>查看IP地址<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ip addr</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h4 id="git安装"><a href="#git安装" class="headerlink" title="git安装"></a>git安装</h4><ol>
+<li>使用yum安装git<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ yum install git</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h4 id="nodejs安装"><a href="#nodejs安装" class="headerlink" title="nodejs安装"></a>nodejs安装</h4><ol>
+<li><p><a href="https://github.com/creationix/nvm" target="_blank" rel="noopener">安装nvm</a>（nodejs version manager）</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.34.0/install.sh | bash</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>刷新环境变量</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">source</span> ~/.bash_profile</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>列出可以安装的nodejs的版本</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ nvm list-remote</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>安装指定版本的nodejs</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ nvm install v10.15.1</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>检测安装是否成功</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ node -v</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>查看已安装的nodejs的版本</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ nvm list</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>切换版本</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ nvm use v10.15.1</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>设置默认版本</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ nvm <span class="built_in">alias</span> default v10.15.1</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h4 id="hexo安装"><a href="#hexo安装" class="headerlink" title="hexo安装"></a>hexo安装</h4><ol>
+<li>安装hexo<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install -g hexo-cli</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>如果安装时卡住，先在~/.nvm/.npmrc文件中添加<br>registry = <a href="http://registry.cnpmjs.org" target="_blank" rel="noopener">http://registry.cnpmjs.org</a><br>再进行安装，如果失败可能是网络原因，重试安装</p>
+<ol start="2">
+<li>查看安装是否成功<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo -version</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h4 id="hexo建站"><a href="#hexo建站" class="headerlink" title="hexo建站"></a>hexo建站</h4><ol>
+<li><p>建站</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ hexo init &lt;folder&gt;</span><br><span class="line">$ <span class="built_in">cd</span> &lt;folder&gt;</span><br><span class="line">$ npm install</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>启动</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure></li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/02/03/Hexo-Install/" data-id="cjroyhe8d0001xupvppqrzoay" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-hello-world" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/02/03/hello-world/" class="article-date">
+  <time datetime="2019-02-03T07:51:24.322Z" itemprop="datePublished">2019-02-03</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/02/03/hello-world/">Hello World</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/02/03/hello-world/" data-id="cjroyhe8j0002xupvpzzlpgza" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/02/04/character-encoding/">character encoding</a>
+          </li>
+        
+          <li>
+            <a href="/2019/02/03/Hexo-Install/">Hexo Install</a>
+          </li>
+        
+          <li>
+            <a href="/2019/02/03/hello-world/">Hello World</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 xly<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
