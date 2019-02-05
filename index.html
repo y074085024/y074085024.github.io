@@ -89,7 +89,7 @@
 <h4 id="部署至Github"><a href="#部署至Github" class="headerlink" title="部署至Github"></a>部署至Github</h4><ol>
 <li>创建一个github库，名字必须是username.github.io</li>
 <li><p>配置ssh秘钥</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$ssh</span>-keygen -t rsa -C <span class="string">"your_email@example.com"</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ssh-keygen -t rsa -C <span class="string">"your_email@example.com"</span></span><br></pre></td></tr></table></figure>
 </li>
 <li><p>将生成的id_rsa.pub里的内容复制到github的SSHKey<img src="http://pmfilr6j2.bkt.clouddn.com/154937239250612hwv4uu.png" alt="paste image"></p>
 </li>
