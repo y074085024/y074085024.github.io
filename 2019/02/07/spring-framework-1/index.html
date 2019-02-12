@@ -3,19 +3,19 @@
 <head><meta name="generator" content="Hexo 3.8.0">
   <meta charset="utf-8">
   
-  <title>home | 求知若渴，虚心若愚</title>
+  <title>spring-framework-1(core) | 求知若渴，虚心若愚</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="xly’s blog,admin deploy">
-<meta property="og:type" content="website">
-<meta property="og:title" content="home">
-<meta property="og:url" content="https://y074085024.github.io/home/index.html">
+  <meta name="description" content="核心技术Version 5.1.4.RELEASE  这部分参考文档涵盖所有Spring Framework完整技术。 其中很重要的一部分是Spring Framework的控制反转（IOC）容器。对 Spring Framework 的 ioc 容器进行彻底理解之后, 将全面介绍 spring 面向切面的编程 (aop) 技术。Spring Framework有自己的aop框架，概念上很容易理解">
+<meta property="og:type" content="article">
+<meta property="og:title" content="spring-framework-1(core)">
+<meta property="og:url" content="https://y074085024.github.io/2019/02/07/spring-framework-1/index.html">
 <meta property="og:site_name" content="求知若渴，虚心若愚">
-<meta property="og:description" content="xly’s blog,admin deploy">
+<meta property="og:description" content="核心技术Version 5.1.4.RELEASE  这部分参考文档涵盖所有Spring Framework完整技术。 其中很重要的一部分是Spring Framework的控制反转（IOC）容器。对 Spring Framework 的 ioc 容器进行彻底理解之后, 将全面介绍 spring 面向切面的编程 (aop) 技术。Spring Framework有自己的aop框架，概念上很容易理解">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-02-05T02:00:10.806Z">
+<meta property="og:updated_time" content="2019-02-12T04:34:38.565Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="home">
-<meta name="twitter:description" content="xly’s blog,admin deploy">
+<meta name="twitter:title" content="spring-framework-1(core)">
+<meta name="twitter:description" content="核心技术Version 5.1.4.RELEASE  这部分参考文档涵盖所有Spring Framework完整技术。 其中很重要的一部分是Spring Framework的控制反转（IOC）容器。对 Spring Framework 的 ioc 容器进行彻底理解之后, 将全面介绍 spring 面向切面的编程 (aop) 技术。Spring Framework有自己的aop框架，概念上很容易理解">
   
     <link rel="alternate" href="/atom.xml" title="求知若渴，虚心若愚" type="application/atom+xml">
   
@@ -64,12 +64,16 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="page-" class="article article-type-page" itemscope="" itemprop="blogPost">
+        <section id="main"><article id="post-spring-framework-1" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
-    <a href="/home/index.html" class="article-date">
-  <time datetime="2019-02-05T00:58:34.000Z" itemprop="datePublished">2019-02-05</time>
+    <a href="/2019/02/07/spring-framework-1/" class="article-date">
+  <time datetime="2019-02-07T10:54:00.000Z" itemprop="datePublished">2019-02-07</time>
 </a>
     
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/spring/">spring</a>
+  </div>
+
   </div>
   <div class="article-inner">
     
@@ -78,7 +82,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      home
+      spring-framework-1(core)
     </h1>
   
 
@@ -88,20 +92,45 @@
       
 <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
-        
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#核心技术"><span class="toc-text">核心技术</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-IOC容器"><span class="toc-text">1. IOC容器</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#1-1-Spring-IOC容器和Beans简介"><span class="toc-text">1.1. Spring IOC容器和Beans简介</span></a></li></ol></li></ol></li></ol>
     </div>
-        <p>xly’s blog,admin deploy</p>
+        <h2 id="核心技术"><a href="#核心技术" class="headerlink" title="核心技术"></a>核心技术</h2><p>Version 5.1.4.RELEASE</p>
+<hr>
+<p><strong>这部分参考文档涵盖所有Spring Framework完整技术。</strong></p>
+<p>其中很重要的一部分是Spring Framework的控制反转（IOC）容器。对 Spring Framework 的 ioc 容器进行彻底理解之后, 将全面介绍 spring 面向切面的编程 (aop) 技术。Spring Framework有自己的aop框架，概念上很容易理解, 它成功地解决了 java 企业编程中 aop 需求的80%。  </p>
+<p>Spring与AspectJ（目前在功能方面是最丰富的, 当然也是 java 企业领域中最成熟的 aop 实现）的集成内容也有提供</p>
+<h4 id="1-IOC容器"><a href="#1-IOC容器" class="headerlink" title="1. IOC容器"></a>1. IOC容器</h4><p>本章包含Spring的IOC容器方面的内容</p>
+<h6 id="1-1-Spring-IOC容器和Beans简介"><a href="#1-1-Spring-IOC容器和Beans简介" class="headerlink" title="1.1. Spring IOC容器和Beans简介"></a>1.1. Spring IOC容器和Beans简介</h6><p>本章涵盖Spring Framework实现控制反转的原则（<a href="https://docs.spring.io/spring-framework/docs/current/spring-framework-reference/overview.html#background-ioc" target="_blank" rel="noopener">看看什么是控制反转</a>）。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://y074085024.github.io/home/index.html" data-id="cjs1vc5x90001rrpvffl24tqt" class="article-share-link">Share</a>
+      <a data-url="https://y074085024.github.io/2019/02/07/spring-framework-1/" data-id="cjs1vc5y10007rrpvjwxpkt61" class="article-share-link">Share</a>
       
       
     </footer>
   </div>
   
     
+<nav id="article-nav">
+  
+    <a href="/2019/02/12/Spring-Framework概览/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Spring Framework Overview
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/02/04/hexo-admin插件安装/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">hexo-admin-qiniu插件安装</div>
+    </a>
+  
+</nav>
+
   
 </article>
 
