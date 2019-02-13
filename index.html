@@ -86,9 +86,9 @@
       
 <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Spring-Framework-概览"><span class="toc-text">Spring Framework 概览</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-我们所说的“Spring”是什么意思"><span class="toc-text">1. 我们所说的“Spring”是什么意思</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-Spring和Spring-Framework的历史"><span class="toc-text">2. Spring和Spring Framework的历史</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-设计哲学"><span class="toc-text">3. 设计哲学</span></a></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Spring-Framework-概览"><span class="toc-text">Spring Framework 概览</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-我们所说的“Spring”是什么意思"><span class="toc-text">1. 我们所说的“Spring”是什么意思</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-Spring和Spring-Framework的历史"><span class="toc-text">2. Spring和Spring Framework的历史</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-设计哲学"><span class="toc-text">3. 设计哲学</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-反馈和贡献"><span class="toc-text">4. 反馈和贡献</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-入门"><span class="toc-text">5. 入门</span></a></li></ol></li></ol>
     </div>
-        <h2 id="Spring-Framework-概览"><a href="#Spring-Framework-概览" class="headerlink" title="Spring Framework 概览"></a>Spring Framework 概览</h2><p>Version 5.1.4.RELEASE</p>
+        <h2 id="Spring-Framework-概览"><a href="#Spring-Framework-概览" class="headerlink" title="Spring Framework 概览"></a>Spring Framework 概览</h2><p>Version 5.1.4.RELEASE<br>Last updated 2019-01-09 12:23:41 UTC</p>
 <hr>
 <p>Spring使得创建企业级java应用变得很容易。它提供了采用 java 语言的企业环境中所需的一切，支持 groovy 和 kotlin 作为 jvm 上的替代语言，可以根据application的需要灵活地创建多种不同的架构。从 Spring Framework 5.0 开始, spring 需要 jdk 8+ (java se 8+), 并已经为 jdk 9 提供开箱即用的支持。</p>
 <p>Spring 支持广泛的应用场景。 在大型企业中, 应用程序通常存在很长时间, 并且必须在 jdk 和应用程序服务器上运行, 这些服务器的升级周期超出了开发人员的控制范围；还有有一些企业可能使用嵌入在服务器中单个的jar文件运行，这个服务器可能运行在云环境中；其他可能是不需要服务器的独立的应用程序（例如批处理或集成工作负载）。</p>
@@ -114,12 +114,21 @@
 <h4 id="3-设计哲学"><a href="#3-设计哲学" class="headerlink" title="3. 设计哲学"></a>3. 设计哲学</h4><p>当您了解框架时，重要的是不仅要知道它的作用，还要了解它遵循的原则。以下是Spring Framework的指导原则：</p>
 <ul>
 <li>提供各个级别的选择。spring 允许您尽可能延迟设计决策。例如, 您可以通过配置切换持久性提供程序, 而无需更改代码。许多其他基础架构相关问题以及与第三方 api 的集成也是如此</li>
+<li>适应不同的观点。Spring是灵活的, 对事情应该如何做并不固执己见，它以不同的视角支持广泛的应用需求。</li>
+<li>保持强大的向后兼容性。Spring的演变被精心管理, 使不同版本之间的重大变化很少。Spring 支持精心选择的 jdk 版本和第三方库, 以方便维护依赖于 spring 的应用程序和库</li>
+<li>关注 api 设计。spring 团队在制作具有直观性且可在多个版本和多年中保持不变的 api 时投入了大量的思考和时间</li>
+<li>为代码质量设置高标准。Spring Framework非常强调有意义的、当前的和准确的 javadoc。它是极少数能够声明干净的代码结构而在包之间没有循环依赖关系的项目之一。</li>
 </ul>
+<h4 id="4-反馈和贡献"><a href="#4-反馈和贡献" class="headerlink" title="4. 反馈和贡献"></a>4. 反馈和贡献</h4><p>对于操作方法问题或诊断或调试问题，我们建议您使用<a href="https://stackoverflow.com/" target="_blank" rel="noopener">StackOverflow</a>,我们有一个<a href="https://spring.io/questions" target="_blank" rel="noopener">问题页面</a>, 列出建议使用的标签。如果您相当确定 spring 框架中存在问题, 或者希望建议某个功能, 请使用 <a href="https://jira.spring.io/projects/SPR/issues" target="_blank" rel="noopener">jira</a> 问题跟踪器。</p>
+<p>如果您有一个解决方案或建议的修复程序, 您可以提交 <a href="https://github.com/spring-projects/spring-framework" target="_blank" rel="noopener">github</a> 上的拉请求。但是, 请记住, 对于所有 (最琐碎的问题除外), 我们希望在问题跟踪器中提交票证, 并留下一份记录供将来参考。</p>
+<p>有关详细信息, 请参阅 ‘<a href="https://github.com/spring-projects/spring-framework/blob/master/CONTRIBUTING.md" target="_blank" rel="noopener">CONTRIBUTING</a>‘ 顶级项目页面中的指南。</p>
+<h4 id="5-入门"><a href="#5-入门" class="headerlink" title="5. 入门"></a>5. 入门</h4><p>如果您刚开始使用 spring, 则可能需要通过创建基于 <a href="http://spring.io/projects/spring-boot" target="_blank" rel="noopener">Spring Boot</a>的应用程序来开始使用 spring 框架。Spring Boot提供了一种快速 (和固执己见) 的方法来创建一个生产就绪的基于 spring 的应用程序。它基于 spring 框架, 约定大于配置, 旨在让您尽快启动和运行。</p>
+<p>您可以使用 <a href="https://start.spring.io/" target="_blank" rel="noopener">start.spring.io</a> 生成基本项目, 也可以遵循 “<a href="https://spring.io/guides" target="_blank" rel="noopener">Getting Started</a>” 指南, 例如 ‘<a href="https://spring.io/guides/gs/rest-service/" target="_blank" rel="noopener">Getting Started Building a RESTful Web Service</a>‘。除了更容易理解外, 这些指南还非常注重任务, 而且大多数都是基于Spring Boot。它们还涵盖 spring 项目组合中的其他项目, 您在解决特定问题时可能需要考虑这些项目。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://y074085024.github.io/2019/02/12/Spring-Framework概览/" data-id="cjs2if27n0002jppvejsffn8k" class="article-share-link">Share</a>
+      <a data-url="https://y074085024.github.io/2019/02/12/Spring-Framework概览/" data-id="cjs2iupjj0002kjpvnc28rpa7" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/spring/">spring</a></li></ul>
