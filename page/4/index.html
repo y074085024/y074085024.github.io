@@ -62,16 +62,12 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-spring-framework-1" class="article article-type-post" itemscope="" itemprop="blogPost">
+    <article id="post-hexo-admin插件安装" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2019/02/07/spring-framework-1/" class="article-date">
-  <time datetime="2019-02-07T10:54:00.000Z" itemprop="datePublished">2019-02-07</time>
+    <a href="/2019/02/04/hexo-admin插件安装/" class="article-date">
+  <time datetime="2019-02-04T13:23:00.000Z" itemprop="datePublished">2019-02-04</time>
 </a>
     
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/spring/">spring</a>
-  </div>
-
   </div>
   <div class="article-inner">
     
@@ -80,7 +76,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/02/07/spring-framework-1/">spring-framework-1(core)</a>
+      <a class="article-title" href="/2019/02/04/hexo-admin插件安装/">hexo-admin-qiniu插件安装</a>
     </h1>
   
 
@@ -90,29 +86,29 @@
       
 <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#核心技术"><span class="toc-text">核心技术</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-IOC容器"><span class="toc-text">1. IOC容器</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#1-1-Spring-IOC容器和Beans简介"><span class="toc-text">1.1. Spring IOC容器和Beans简介</span></a></li></ol></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#安装命令"><span class="toc-text">安装命令</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#使用七牛云服务"><span class="toc-text">使用七牛云服务</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#配置oss"><span class="toc-text">配置oss</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#部署至Github"><span class="toc-text">部署至Github</span></a></li></ol>
     </div>
-        <h2 id="核心技术"><a href="#核心技术" class="headerlink" title="核心技术"></a><a href="https://docs.spring.io/spring-framework/docs/current/spring-framework-reference/core.html" target="_blank" rel="noopener">核心技术</a></h2><p>Version 5.1.4.RELEASE</p>
-<hr>
-<p><strong>这部分参考文档涵盖所有Spring Framework完整技术。</strong></p>
-<p>其中很重要的一部分是Spring Framework的控制反转（IOC）容器。对 Spring Framework 的 ioc 容器进行彻底理解之后, 将全面介绍 spring 面向切面的编程 (aop) 技术。Spring Framework有自己的aop框架，概念上很容易理解, 它成功地解决了 java 企业编程中 aop 需求的80%。  </p>
-<p>Spring与AspectJ（目前在功能方面是最丰富的, 当然也是 java 企业领域中最成熟的 aop 实现）的集成内容也有提供</p>
-<h4 id="1-IOC容器"><a href="#1-IOC容器" class="headerlink" title="1. IOC容器"></a>1. IOC容器</h4><p>本章包含Spring的IOC容器方面的内容</p>
-<h6 id="1-1-Spring-IOC容器和Beans简介"><a href="#1-1-Spring-IOC容器和Beans简介" class="headerlink" title="1.1. Spring IOC容器和Beans简介"></a>1.1. Spring IOC容器和Beans简介</h6><p>本章涵盖Spring Framework实现控制反转的原则（<a href="https://y074085024.github.io/2019/02/12/Spring-Framework%E6%A6%82%E8%A7%88/">看看什么是控制反转</a>）。IOC 也称为依赖关系注入 (DI)，他是一个过程，根据这个过程定义对象的依赖关系（也就是说, 他们使用的其他对象），通过构造参数、工厂方法参数传递实例，在对象构造完成后设置对象的属性或者从工厂方法中返回，然后当bean返回的时候容器负责将依赖关系注入，这个过程从根本上说是反过来的（因此得名, 控制反转），通过使用类或服务定位器模式等机制的直接构造来控制其依赖项的实例化或位置。</p>
-<p>org.springframework.beans和org.springframework.context这两个包是Spring IOC的基础。BeanFactory接口提供了高级配置的机制可以管理任何类型的对象。ApplicationContext是BeanFactory的子接口，它增加了如下功能：</p>
-<ul>
-<li>集成Spring AOP很容易</li>
-<li>消息资源的处理（用于国际化）</li>
-<li>事件发布</li>
-<li>应用层特殊的上下文，如在web应用中使用的WebApplicationContext</li>
-</ul>
-<p>简言之，BeanFactory提供了一个配置框架和基础功能，ApplicationContext提供了更多企业定制的功能。ApplicationContext是BeanFactory的一个完整的超集，仅仅在本章中描述Spring IOC容器时使用。关于更多替代ApplictionContext的BeanFactory的用法，请看<a href="https://docs.spring.io/spring-framework/docs/current/spring-framework-reference/core.html#beans-beanfactory" target="_blank" rel="noopener">The BeanFactory</a></p>
-<p>在Spring中，对象形成了应用程序的骨架，他们被Spring IOC容器进行管理，在容器中叫做beans。bean 是由 spring ioc 容器实例化、组装和以其他方式管理的对象。因此，一个bean是你应用程序中众多对象中的一个，Beans的互相依赖关系反映在容器使用的配置元数据中。</p>
+        <h4 id="安装命令"><a href="#安装命令" class="headerlink" title="安装命令"></a><a href="http://lazyboy.site/hexo-admin-qiniu/" target="_blank" rel="noopener">安装命令</a></h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install --save hexo-admin-qiniu</span><br></pre></td></tr></table></figure>
+<h4 id="使用七牛云服务"><a href="#使用七牛云服务" class="headerlink" title="使用七牛云服务"></a>使用<a href="https://www.qiniu.com/" target="_blank" rel="noopener">七牛云服务</a></h4><ol>
+<li>注册一个七牛云账号</li>
+<li>实名认证，一般需要三天</li>
+<li>购买一个oss服务，提供10G免费的存储空间</li>
+</ol>
+<h4 id="配置oss"><a href="#配置oss" class="headerlink" title="配置oss"></a>配置oss</h4><p>_config.yml<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">admin:</span><br><span class="line">  qiniuCfg:</span><br><span class="line">      imageslim: true  # 启动图片瘦身，仅华东区bucket可以使用</span><br><span class="line">      AccessKey: &apos;your qiniu AK&apos;</span><br><span class="line">      SecretKey: &apos;your qiniu SK&apos;</span><br><span class="line">      BucketName: &apos;your BK Name&apos;</span><br><span class="line">      bucketHost: &apos;you BK Host&apos;</span><br></pre></td></tr></table></figure></p>
+<h4 id="部署至Github"><a href="#部署至Github" class="headerlink" title="部署至Github"></a>部署至Github</h4><ol>
+<li>创建一个github库，名字必须是username.github.io</li>
+<li><p>配置ssh秘钥</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ssh-keygen -t rsa -C <span class="string">"your_email@example.com"</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>将生成的id_rsa.pub里的内容复制到github的SSHKey<img src="http://pmfilr6j2.bkt.clouddn.com/154937239250612hwv4uu.png" alt="paste image"></p>
+</li>
+<li>配置remote repository<br>_config.yml<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">deploy: </span><br><span class="line">   type: git</span><br><span class="line">   repository: git@github.com:username/username.github.io.git</span><br><span class="line">   branch: master</span><br></pre></td></tr></table></figure></li>
+</ol>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://y074085024.github.io/2019/02/07/spring-framework-1/" data-id="cjs2iupkg0007kjpvoqkef4aw" class="article-share-link">Share</a>
+      <a data-url="https://y074085024.github.io/2019/02/04/hexo-admin插件安装/" data-id="cjs78vh9b000a1opv5mxkrhjx" class="article-share-link">Share</a>
       
       
     </footer>
@@ -126,7 +122,7 @@
 
 
   <nav id="page-nav">
-<a class="extend prev" rel="prev" href="/page/3/">&laquo; 上一页</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/5/">下一页 &raquo;</a>
+<a class="extend prev" rel="prev" href="/page/3/">&laquo; 上一页</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/5/">下一页 &raquo;</a>
   </nav>
 
 </section>
@@ -134,13 +130,6 @@
           <aside id="sidebar">
   
     
-  <div class="widget-wrap">
-    <h3 class="widget-title">分类</h3>
-    <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/spring/">spring</a></li></ul>
-    </div>
-  </div>
-
 
   
     
@@ -191,11 +180,11 @@
           </li>
         
           <li>
-            <a href="/2019/02/07/spring-framework-1/">spring-framework-1(core)</a>
+            <a href="/2019/02/04/hexo-admin插件安装/">hexo-admin-qiniu插件安装</a>
           </li>
         
           <li>
-            <a href="/2019/02/04/hexo-admin插件安装/">hexo-admin-qiniu插件安装</a>
+            <a href="/2019/02/04/character-encoding/">character encoding</a>
           </li>
         
       </ul>
