@@ -3,19 +3,18 @@
 <head><meta name="generator" content="Hexo 3.8.0">
   <meta charset="utf-8">
   
-  <title>spring-framework(core) | 求知若渴，虚心若愚</title>
+  <title>spring-framework-1(core) | 求知若渴，虚心若愚</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="核心技术Version 5.1.4.RELEASE  这部分参考文档涵盖所有Spring Framework完整技术。 其中很重要的一部分是Spring Framework的控制反转（IOC）容器。对 Spring Framework 的 ioc 容器进行彻底理解之后, 将全面介绍 spring 面向切面的编程 (aop) 技术。Spring Framework有自己的aop框架，概念上很容易理解">
-<meta name="keywords" content="spring-framework">
 <meta property="og:type" content="article">
-<meta property="og:title" content="spring-framework(core)">
-<meta property="og:url" content="https://y074085024.github.io/2019/02/14/spring-framework-1-1-core/index.html">
+<meta property="og:title" content="spring-framework-1(core)">
+<meta property="og:url" content="https://y074085024.github.io/2019/02/07/spring-framework-1/index.html">
 <meta property="og:site_name" content="求知若渴，虚心若愚">
 <meta property="og:description" content="核心技术Version 5.1.4.RELEASE  这部分参考文档涵盖所有Spring Framework完整技术。 其中很重要的一部分是Spring Framework的控制反转（IOC）容器。对 Spring Framework 的 ioc 容器进行彻底理解之后, 将全面介绍 spring 面向切面的编程 (aop) 技术。Spring Framework有自己的aop框架，概念上很容易理解">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-02-14T01:30:42.566Z">
+<meta property="og:updated_time" content="2019-02-14T01:20:45.253Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="spring-framework(core)">
+<meta name="twitter:title" content="spring-framework-1(core)">
 <meta name="twitter:description" content="核心技术Version 5.1.4.RELEASE  这部分参考文档涵盖所有Spring Framework完整技术。 其中很重要的一部分是Spring Framework的控制反转（IOC）容器。对 Spring Framework 的 ioc 容器进行彻底理解之后, 将全面介绍 spring 面向切面的编程 (aop) 技术。Spring Framework有自己的aop框架，概念上很容易理解">
   
     <link rel="alternate" href="/atom.xml" title="求知若渴，虚心若愚" type="application/atom+xml">
@@ -65,12 +64,16 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-spring-framework-1-1-core" class="article article-type-post" itemscope="" itemprop="blogPost">
+        <section id="main"><article id="post-spring-framework-1" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2019/02/14/spring-framework-1-1-core/" class="article-date">
-  <time datetime="2019-02-14T01:20:00.000Z" itemprop="datePublished">2019-02-14</time>
+    <a href="/2019/02/07/spring-framework-1/" class="article-date">
+  <time datetime="2019-02-07T10:54:00.000Z" itemprop="datePublished">2019-02-07</time>
 </a>
     
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/spring/">spring</a>
+  </div>
+
   </div>
   <div class="article-inner">
     
@@ -79,7 +82,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      spring-framework(core)
+      spring-framework-1(core)
     </h1>
   
 
@@ -89,7 +92,7 @@
       
 <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#核心技术"><span class="toc-text">核心技术</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-IOC容器"><span class="toc-text">1. IOC容器</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#1-1-Spring-IOC容器和Beans简介"><span class="toc-text">1.1. Spring IOC容器和Beans简介</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#1-2-容器概览"><span class="toc-text">1.2. 容器概览</span></a></li></ol></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#核心技术"><span class="toc-text">核心技术</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-IOC容器"><span class="toc-text">1. IOC容器</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#1-1-Spring-IOC容器和Beans简介"><span class="toc-text">1.1. Spring IOC容器和Beans简介</span></a></li></ol></li></ol></li></ol>
     </div>
         <h2 id="核心技术"><a href="#核心技术" class="headerlink" title="核心技术"></a><a href="https://docs.spring.io/spring-framework/docs/current/spring-framework-reference/core.html" target="_blank" rel="noopener">核心技术</a></h2><p>Version 5.1.4.RELEASE</p>
 <hr>
@@ -97,7 +100,7 @@
 <p>其中很重要的一部分是Spring Framework的控制反转（IOC）容器。对 Spring Framework 的 ioc 容器进行彻底理解之后, 将全面介绍 spring 面向切面的编程 (aop) 技术。Spring Framework有自己的aop框架，概念上很容易理解, 它成功地解决了 java 企业编程中 aop 需求的80%。  </p>
 <p>Spring与AspectJ（目前在功能方面是最丰富的, 当然也是 java 企业领域中最成熟的 aop 实现）的集成内容也有提供</p>
 <h4 id="1-IOC容器"><a href="#1-IOC容器" class="headerlink" title="1. IOC容器"></a>1. IOC容器</h4><p>本章包含Spring的IOC容器方面的内容</p>
-<h6 id="1-1-Spring-IOC容器和Beans简介"><a href="#1-1-Spring-IOC容器和Beans简介" class="headerlink" title="1.1. Spring IOC容器和Beans简介"></a>1.1. Spring IOC容器和Beans简介</h6><p>本章涵盖Spring Framework实现控制反转的原则（<a href="https://y074085024.github.io/2019/02/12/Spring-Framework%E6%A6%82%E8%A7%88/">Spring Framework概览</a>）。IOC 也称为依赖关系注入 (DI)，他是一个过程，根据这个过程定义对象的依赖关系（也就是说, 他们使用的其他对象），通过构造参数、工厂方法参数传递实例，在对象构造完成后设置对象的属性或者从工厂方法中返回，然后当bean返回的时候容器负责将依赖关系注入，这个过程从根本上说是反过来的（因此得名, 控制反转），通过使用类或服务定位器模式等机制的直接构造来控制其依赖项的实例化或位置。</p>
+<h6 id="1-1-Spring-IOC容器和Beans简介"><a href="#1-1-Spring-IOC容器和Beans简介" class="headerlink" title="1.1. Spring IOC容器和Beans简介"></a>1.1. Spring IOC容器和Beans简介</h6><p>本章涵盖Spring Framework实现控制反转的原则（<a href="https://y074085024.github.io/2019/02/12/Spring-Framework%E6%A6%82%E8%A7%88/">看看什么是控制反转</a>）。IOC 也称为依赖关系注入 (DI)，他是一个过程，根据这个过程定义对象的依赖关系（也就是说, 他们使用的其他对象），通过构造参数、工厂方法参数传递实例，在对象构造完成后设置对象的属性或者从工厂方法中返回，然后当bean返回的时候容器负责将依赖关系注入，这个过程从根本上说是反过来的（因此得名, 控制反转），通过使用类或服务定位器模式等机制的直接构造来控制其依赖项的实例化或位置。</p>
 <p>org.springframework.beans和org.springframework.context这两个包是Spring IOC的基础。BeanFactory接口提供了高级配置的机制可以管理任何类型的对象。ApplicationContext是BeanFactory的子接口，它增加了如下功能：</p>
 <ul>
 <li>集成Spring AOP很容易</li>
@@ -107,35 +110,32 @@
 </ul>
 <p>简言之，BeanFactory提供了一个配置框架和基础功能，ApplicationContext提供了更多企业定制的功能。ApplicationContext是BeanFactory的一个完整的超集，仅仅在本章中描述Spring IOC容器时使用。关于更多替代ApplictionContext的BeanFactory的用法，请看<a href="https://docs.spring.io/spring-framework/docs/current/spring-framework-reference/core.html#beans-beanfactory" target="_blank" rel="noopener">The BeanFactory</a></p>
 <p>在Spring中，对象形成了应用程序的骨架，他们被Spring IOC容器进行管理，在容器中叫做beans。bean 是由 spring ioc 容器实例化、组装和以其他方式管理的对象。因此，一个bean是你应用程序中众多对象中的一个，Beans的互相依赖关系反映在容器使用的配置元数据中。</p>
-<h6 id="1-2-容器概览"><a href="#1-2-容器概览" class="headerlink" title="1.2. 容器概览"></a>1.2. 容器概览</h6><p>org.springframework.context.ApplicationContext接口代表了Spring IOC容器，负责实例化、配置和组装beans。容器通过读取配置元数据获取有关要实例化、配置和组装的对象的说明。配置元数据可以是xml、java注解和java代码。它允许您表达组成应用程序的对象以及这些对象之间丰富的相互依存关系。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://y074085024.github.io/2019/02/14/spring-framework-1-1-core/" data-id="cjs3xt8ts0000qcpvda4shjps" class="article-share-link">Share</a>
+      <a data-url="https://y074085024.github.io/2019/02/07/spring-framework-1/" data-id="cjs2iupkg0007kjpvoqkef4aw" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/spring-framework/">spring-framework</a></li></ul>
-
     </footer>
   </div>
   
     
 <nav id="article-nav">
   
-    <a href="/2019/02/16/IntellJ-IDEA-依赖移动补全插件/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2019/02/12/Spring-Framework概览/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
-          IntellJ IDEA 依赖移动补全插件
+          Spring Framework Overview
         
       </div>
     </a>
   
   
-    <a href="/2019/02/12/Spring-Framework概览/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2019/02/04/hexo-admin插件安装/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">Spring Framework Overview</div>
+      <div class="article-nav-title">hexo-admin-qiniu插件安装</div>
     </a>
   
 </nav>
