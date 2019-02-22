@@ -9,7 +9,7 @@
 <meta property="og:title" content="求知若渴，虚心若愚">
 <meta property="og:url" content="https://y074085024.github.io/page/5/index.html">
 <meta property="og:site_name" content="求知若渴，虚心若愚">
-<meta property="og:locale" content="zh-CN">
+<meta property="og:locale" content="zh-Hans">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="求知若渴，虚心若愚">
   
@@ -51,7 +51,7 @@
         
           <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://y074085024.github.io"></form>
@@ -62,10 +62,10 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-character-encoding" class="article article-type-post" itemscope="" itemprop="blogPost">
+    <article id="post-spring-framework-core" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2019/02/04/character-encoding/" class="article-date">
-  <time datetime="2019-02-04T13:15:00.000Z" itemprop="datePublished">2019-02-04</time>
+    <a href="/2019/02/14/spring-framework-core/" class="article-date">
+  <time datetime="2019-02-14T01:20:00.000Z" itemprop="datePublished">2019-02-14</time>
 </a>
     
   </div>
@@ -76,7 +76,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/02/04/character-encoding/">character encoding</a>
+      <a class="article-title" href="/2019/02/14/spring-framework-core/">spring-framework(core)</a>
     </h1>
   
 
@@ -86,32 +86,34 @@
       
 <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
-        <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#ASCII"><span class="toc-text">ASCII</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ISO-8859-1"><span class="toc-text">ISO-8859-1</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#GB2312"><span class="toc-text">GB2312</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#GBK"><span class="toc-text">GBK</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#GB18030"><span class="toc-text">GB18030</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Unicode"><span class="toc-text">Unicode</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#UTF-8"><span class="toc-text">UTF-8</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#核心技术"><span class="toc-text">核心技术</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-IOC容器"><span class="toc-text">1. IOC容器</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#1-1-Spring-IOC容器和Beans简介"><span class="toc-text">1.1. Spring IOC容器和Beans简介</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#1-2-容器概览"><span class="toc-text">1.2. 容器概览</span></a></li></ol></li></ol></li></ol>
     </div>
-        <h4 id="ASCII"><a href="#ASCII" class="headerlink" title="ASCII"></a>ASCII</h4><p>ASCII全称American Standard Code for Infomation Interchange,美国信息交换标准代码，使用7bit来表示一个字符，其中一位用作校验位，前0x20用来做控制字符，后边的编码用来表示26个大小写字母和标点符号等，一直编码到127。</p>
-<h4 id="ISO-8859-1"><a href="#ISO-8859-1" class="headerlink" title="ISO-8859-1"></a>ISO-8859-1</h4><p>后来计算机引进西欧，西欧国家还有其他的未编码字符，于是为了使计算机能够显示就使用了128~255共128个codepoint(码位)来编码其他字符，这套字符集叫做ISO-8859-1，兼容前边的0~127个codepoint，也就是ASCII。</p>
-<h4 id="GB2312"><a href="#GB2312" class="headerlink" title="GB2312"></a>GB2312</h4><p>与此同时中国也引入了计算机，但是中国的象形文字有几千个，使用1byte所能表示的信息量不够用来编码中国的汉字，所以中国使用更大的数字来编码汉字一开始使用1000 0000 1000 0000(0x7070)从此开始递增的codepoint来编码汉字，这套字符集叫做GB2312，兼容ASCII。</p>
-<h4 id="GBK"><a href="#GBK" class="headerlink" title="GBK"></a>GBK</h4><p>后来因为一些生僻字不够表示，所以放开了后一个字节的小于128的编码，所以可以使用从1000 0000 0000 0000(0x7000)从此开始递增的codepoint来编码汉字，这套字符集叫做GBK，兼容GB2312。</p>
-<h4 id="GB18030"><a href="#GB18030" class="headerlink" title="GB18030"></a>GB18030</h4><p>再后来少数民族也有很多他们自己的文字符号，继续在GBK上扩充把剩余的未使用的codepoint进行编码，至此完整的包含中国全部汉字的编码集产生，即GB18030使用GB18030解码的方法是遇到小于128的直接按照ASCII码解码，大于128的则取两个字节按照GB18030字符集解码.</p>
-<h4 id="Unicode"><a href="#Unicode" class="headerlink" title="Unicode"></a>Unicode</h4><p>除了中国，其他国家和地区都有自己的文字，比如日本、韩国和中国的台湾等等，他们都自己制订一套适用于自己的编码集，如台湾使用Big5，这造成多个地区或国家信息交换的不方便，于是ISO组织决定重新编码一套包含地球上全部文字符号的编码集UCS(Universal Character Set),也叫Unicode，该编码集使用两个字节来表示一个字符，ASCII和ISO-8859-1的高位字节用0填充，汉字等其他象形文字重新编码，至此字符集统一。</p>
-<h4 id="UTF-8"><a href="#UTF-8" class="headerlink" title="UTF-8"></a>UTF-8</h4><p>但是可以发现ASCII码用一个字节就可以表示的信息，现在使用unicode不得不使用两个字节来表示，对于英语文本的信息极大地浪费了存储空间和传输带框，所以出现了utf-8编码规则，把unicode字符集按数字大小分类，按照utf-8的规则编码，utf-8完全兼容ascii和iso-8859-1的编码规则，所以在使用以英文或西欧字符集的文本上极大地节省内存空间，但是utf-8表示汉字时使用3个字节，相比于GB18030多一个字节，所以在确定软件使用对象是使用汉字字符集的情况下使用GB18030是一种很好的选择。UTF-8编码字符时可能使用1~6个字节，另外对于UTF-16是最小使用两个字节表示字符，使用此编码是为了提高处理能力，英文字符浪费一倍空间，相当于空间换时间UTF-32是为了扩展保留。</p>
-<p><em>注：ASCII、ISO-8859-1、GB2312、GBK、GB18030、Unicode都叫做字符集，即使字符信息可以数字化表示的映射，比如1<->a  2<->b 3<->c等等，我们可以使用将1、2、3直接对应到计算机的字节中这种编码规则来使计算机能够存储、处理。因为ASCII字符集的编码规则就是使用数字的二进制直接映射到计算机字节中,假如ASCII中的c<->30000,那么肯定不能用1个字节来表示；一般的情况下编码规则是直接使用字符集对应的数字直接映射到计算机中的字节来处理字符，但是unicode如果直接像ASCII、ISO、GB18030这些字符集方式编码会存在浪费资源，所以unicode才出现了不同的编码规则如utf-8，如果把utf-8对应的字节理解成数字的话，那么相当于本来0xF1F1<->好,utf-8编码过后0xE18080<->好。因为unicode包罗万象，但是统一，统一就意味着处理方便，如果一味的考虑空间效率，可能使得处理方式变得纷繁复杂，那就是另一种极端了,所谓鱼和熊掌不可兼得，时间和空间需要根据具体的业务场景来权衡。</-></-></-></-></-></-></em></p>
-<p>utf-8编码规则如下：第一个字节1的个数代表了后边多少个字节组成一个字符编码</p>
+        <h2 id="核心技术"><a href="#核心技术" class="headerlink" title="核心技术"></a><a href="https://docs.spring.io/spring-framework/docs/current/spring-framework-reference/core.html" target="_blank" rel="noopener">核心技术</a></h2><p>Version 5.1.4.RELEASE</p>
+<hr>
+<p><strong>这部分参考文档涵盖所有Spring Framework完整技术。</strong></p>
+<p>其中很重要的一部分是Spring Framework的控制反转（IOC）容器。对 Spring Framework 的 ioc 容器进行彻底理解之后, 将全面介绍 spring 面向切面的编程 (aop) 技术。Spring Framework有自己的aop框架，概念上很容易理解, 它成功地解决了 java 企业编程中 aop 需求的80%。  </p>
+<p>Spring与AspectJ（目前在功能方面是最丰富的, 当然也是 java 企业领域中最成熟的 aop 实现）的集成内容也有提供</p>
+<h4 id="1-IOC容器"><a href="#1-IOC容器" class="headerlink" title="1. IOC容器"></a>1. IOC容器</h4><p>本章包含Spring的IOC容器方面的内容</p>
+<h6 id="1-1-Spring-IOC容器和Beans简介"><a href="#1-1-Spring-IOC容器和Beans简介" class="headerlink" title="1.1. Spring IOC容器和Beans简介"></a>1.1. Spring IOC容器和Beans简介</h6><p>本章涵盖Spring Framework实现控制反转的原则（<a href="https://y074085024.github.io/2019/02/12/Spring-Framework%E6%A6%82%E8%A7%88/">Spring Framework概览</a>）。IOC 也称为依赖关系注入 (DI)，他是一个过程，根据这个过程定义对象的依赖关系（也就是说, 他们使用的其他对象），通过构造参数、工厂方法参数传递实例，在对象构造完成后设置对象的属性或者从工厂方法中返回，然后当bean返回的时候容器负责将依赖关系注入，这个过程从根本上说是反过来的（因此得名, 控制反转），通过使用类或服务定位器模式等机制的直接构造来控制其依赖项的实例化或位置。</p>
+<p>org.springframework.beans和org.springframework.context这两个包是Spring IOC的基础。BeanFactory接口提供了高级配置的机制可以管理任何类型的对象。ApplicationContext是BeanFactory的子接口，它增加了如下功能：</p>
 <ul>
-<li>0xxxxxxx</li>
-<li>110xxxxx 10xxxxxx</li>
-<li>1110xxxx 10xxxxxx 10xxxxxx</li>
-<li>11110xxx 10xxxxxx 10xxxxxx 10xxxxxx</li>
-<li>111110xx 10xxxxxx 10xxxxxx 10xxxxxx 10xxxxxx</li>
-<li>1111110x 10xxxxxx 10xxxxxx 10xxxxxx 10xxxxxx 10xxxxxx</li>
+<li>集成Spring AOP很容易</li>
+<li>消息资源的处理（用于国际化）</li>
+<li>事件发布</li>
+<li>应用层特殊的上下文，如在web应用中使用的WebApplicationContext</li>
 </ul>
+<p>简言之，BeanFactory提供了一个配置框架和基础功能，ApplicationContext提供了更多企业定制的功能。ApplicationContext是BeanFactory的一个完整的超集，仅仅在本章中描述Spring IOC容器时使用。关于更多替代ApplictionContext的BeanFactory的用法，请看<a href="https://docs.spring.io/spring-framework/docs/current/spring-framework-reference/core.html#beans-beanfactory" target="_blank" rel="noopener">The BeanFactory</a></p>
+<p>在Spring中，对象形成了应用程序的骨架，他们被Spring IOC容器进行管理，在容器中叫做beans。bean 是由 spring ioc 容器实例化、组装和以其他方式管理的对象。因此，一个bean是你应用程序中众多对象中的一个，Beans的互相依赖关系反映在容器使用的配置元数据中。</p>
+<h6 id="1-2-容器概览"><a href="#1-2-容器概览" class="headerlink" title="1.2. 容器概览"></a>1.2. 容器概览</h6><p>org.springframework.context.ApplicationContext接口代表了Spring IOC容器，负责实例化、配置和组装beans。容器通过读取配置元数据获取有关要实例化、配置和组装的对象的说明。配置元数据可以是xml、java注解和java代码。它允许您表达组成应用程序的对象以及这些对象之间丰富的相互依存关系。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://y074085024.github.io/2019/02/04/character-encoding/" data-id="cjs90d0cb000626pvj42ksm7r" class="article-share-link">Share</a>
+      <a data-url="https://y074085024.github.io/2019/02/14/spring-framework-core/" data-id="cjsbask0g000btbpvughn9imn" class="article-share-link">Share</a>
       
       
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/spring-framework/">spring-framework</a></li></ul>
+
     </footer>
   </div>
   
@@ -123,7 +125,7 @@
 
 
   <nav id="page-nav">
-<a class="extend prev" rel="prev" href="/page/4/">&laquo; 上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/6/">下一页 &raquo;</a>
+<a class="extend prev" rel="prev" href="/page/4/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/6/">Next &raquo;</a>
   </nav>
 
 </section>
@@ -131,13 +133,10 @@
           <aside id="sidebar">
   
     
-
-  
-    
   <div class="widget-wrap">
-    <h3 class="widget-title">标签</h3>
+    <h3 class="widget-title">Categories</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/IntellJ-IDEA/">IntellJ IDEA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring-framework/">spring-framework</a></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/spring/">spring</a></li></ul>
     </div>
   </div>
 
@@ -145,18 +144,28 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">标签云</h3>
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/IntellJ-IDEA/">IntellJ IDEA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Lookup/">Lookup</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring-framework/">spring-framework</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/IntellJ-IDEA/" style="font-size: 10px;">IntellJ IDEA</a> <a href="/tags/hexo/" style="font-size: 20px;">hexo</a> <a href="/tags/spring-framework/" style="font-size: 20px;">spring-framework</a>
+      <a href="/tags/IntellJ-IDEA/" style="font-size: 10px;">IntellJ IDEA</a> <a href="/tags/Lookup/" style="font-size: 10px;">Lookup</a> <a href="/tags/hexo/" style="font-size: 20px;">hexo</a> <a href="/tags/spring-framework/" style="font-size: 20px;">spring-framework</a>
     </div>
   </div>
 
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">归档</h3>
+    <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">二月 2019</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a></li></ul>
     </div>
   </div>
 
@@ -164,9 +173,21 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">最新文章</h3>
+    <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2019/02/22/Method-Injection-应用/">Method Injection 应用</a>
+          </li>
+        
+          <li>
+            <a href="/2019/02/21/Spring-IOC/">Spring IOC</a>
+          </li>
+        
+          <li>
+            <a href="/2019/02/16/手写spring-webmvc/">自己动手写一个spring-webmvc</a>
+          </li>
         
           <li>
             <a href="/2019/02/16/IntellJ-IDEA-依赖自动补全插件/">IntellJ IDEA 依赖自动补全插件</a>
@@ -174,18 +195,6 @@
         
           <li>
             <a href="/2019/02/14/spring-framework-core/">spring-framework(core)</a>
-          </li>
-        
-          <li>
-            <a href="/2019/02/12/Spring-Framework概览/">Spring Framework Overview</a>
-          </li>
-        
-          <li>
-            <a href="/2019/02/04/hexo-admin插件安装/">hexo-admin-qiniu插件安装</a>
-          </li>
-        
-          <li>
-            <a href="/2019/02/04/character-encoding/">character encoding</a>
           </li>
         
       </ul>

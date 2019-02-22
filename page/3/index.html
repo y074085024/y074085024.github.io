@@ -9,7 +9,7 @@
 <meta property="og:title" content="求知若渴，虚心若愚">
 <meta property="og:url" content="https://y074085024.github.io/page/3/index.html">
 <meta property="og:site_name" content="求知若渴，虚心若愚">
-<meta property="og:locale" content="zh-CN">
+<meta property="og:locale" content="zh-Hans">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="求知若渴，虚心若愚">
   
@@ -51,7 +51,7 @@
         
           <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://y074085024.github.io"></form>
@@ -62,10 +62,10 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-Spring-Framework概览" class="article article-type-post" itemscope="" itemprop="blogPost">
+    <article id="post-手写spring-webmvc" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2019/02/12/Spring-Framework概览/" class="article-date">
-  <time datetime="2019-02-12T04:38:00.000Z" itemprop="datePublished">2019-02-12</time>
+    <a href="/2019/02/16/手写spring-webmvc/" class="article-date">
+  <time datetime="2019-02-16T13:26:52.000Z" itemprop="datePublished">2019-02-16</time>
 </a>
     
   </div>
@@ -76,7 +76,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/02/12/Spring-Framework概览/">Spring Framework Overview</a>
+      <a class="article-title" href="/2019/02/16/手写spring-webmvc/">自己动手写一个spring-webmvc</a>
     </h1>
   
 
@@ -86,53 +86,16 @@
       
 <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Spring-Framework-概览"><span class="toc-text">Spring Framework 概览</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-我们所说的“Spring”是什么意思"><span class="toc-text">1. 我们所说的“Spring”是什么意思</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-Spring和Spring-Framework的历史"><span class="toc-text">2. Spring和Spring Framework的历史</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-设计哲学"><span class="toc-text">3. 设计哲学</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-反馈和贡献"><span class="toc-text">4. 反馈和贡献</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-入门"><span class="toc-text">5. 入门</span></a></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#创建一个web项目"><span class="toc-text">创建一个web项目</span></a></li></ol>
     </div>
-        <h2 id="Spring-Framework-概览"><a href="#Spring-Framework-概览" class="headerlink" title="Spring Framework 概览"></a><a href="https://docs.spring.io/spring-framework/docs/current/spring-framework-reference/overview.html" target="_blank" rel="noopener">Spring Framework 概览</a></h2><p>Version 5.1.4.RELEASE<br>Last updated 2019-01-09 12:23:41 UTC</p>
-<hr>
-<p>Spring使得创建企业级java应用变得很容易。它提供了采用 java 语言的企业环境中所需的一切，支持 groovy 和 kotlin 作为 jvm 上的替代语言，可以根据application的需要灵活地创建多种不同的架构。从 Spring Framework 5.0 开始, spring 需要 jdk 8+ (java se 8+), 并已经为 jdk 9 提供开箱即用的支持。</p>
-<p>Spring 支持广泛的应用场景。 在大型企业中, 应用程序通常存在很长时间, 并且必须在 jdk 和应用程序服务器上运行, 这些服务器的升级周期超出了开发人员的控制范围；还有有一些企业可能使用嵌入在服务器中单个的jar文件运行，这个服务器可能运行在云环境中；其他可能是不需要服务器的独立的应用程序（例如批处理或集成工作负载）。</p>
-<p>Spring是开源的。它有一个庞大而活跃的社区, 根据各种现实世界的用例提供持续的反馈，这帮助Spring在很长一段时间内成功地进化。</p>
-<h4 id="1-我们所说的“Spring”是什么意思"><a href="#1-我们所说的“Spring”是什么意思" class="headerlink" title="1. 我们所说的“Spring”是什么意思"></a>1. 我们所说的“Spring”是什么意思</h4><p>术语“Spring”在不同的上下文中代表不同的意思。它可以用来指 Spring Framework项目本身, 这就是一切的开始，随着时间的推移，其他的Spring项目已经构建在Spring Framework之上，通常，人们所说“Spring”，表示的是“Spring”的全家桶。本参考文档着重于基础设施：Spring Framework本身。</p>
-<p>Spring Framework被分成模块，应用程序可以选择他们所需要的模块，核心容器的核心模块包括配置模块和依赖注入（dependency injection）机制。除此之外，Spring Framework还为不同的应用架构提供基础的支持，包括消息、事务性数据、持久化和web。也包含了基于Servlet的Spring MVC web框架和同时开发的Spring WebFlux响应式web框架。</p>
-<p>关于模块的说明：Spring Framework的jar包允许部署到 jdk 9 的模块路径 (‘Jigsaw’)。对于使用Jigsaw的应用程序，Spring Framework 5的jar包附带了 ‘Automatic-Module-Name’ 清单条目, 定义了稳定的语言级模块名称 (“spring.core”, “spring.context”等), 独立于 jar 工件名称 (jar遵循相同的命名模式, 将’.’改为’-‘, 例如”spring-core” and “spring-context”)，当然, Spring Framework的jar包在 jdk8 和9上的类路径上都运行稳定。</p>
-<h4 id="2-Spring和Spring-Framework的历史"><a href="#2-Spring和Spring-Framework的历史" class="headerlink" title="2. Spring和Spring Framework的历史"></a>2. Spring和Spring Framework的历史</h4><p>2003年, 作为对早期 j2ee 规范的复杂性的回应, 出现了Spring。虽然有些人认为 java ee 和 spring 是竞争关系，事实上，Spring是对java ee的补充。Spring编程模型不包含java ee全部规范，而是集成了java ee簇中精心挑选的个性化规范：</p>
-<ul>
-<li>Servlet API (<a href="https://jcp.org/en/jsr/detail?id=340" target="_blank" rel="noopener">JSR 340</a>)</li>
-<li>WebSocket API (<a href="https://www.jcp.org/en/jsr/detail?id=356" target="_blank" rel="noopener">JSR 356</a>)</li>
-<li>Concurrency Utilities (<a href="https://www.jcp.org/en/jsr/detail?id=326" target="_blank" rel="noopener">JSR 236</a>)</li>
-<li>JSON Binding API (<a href="https://www.jcp.org/en/jsr/detail?id=367" target="_blank" rel="noopener">JSR 367</a>)</li>
-<li>Bean Validation (<a href="https://www.jcp.org/en/jsr/detail?id=303" target="_blank" rel="noopener">JSR 303</a>)</li>
-<li>JPA (<a href="https://www.jcp.org/en/jsr/detail?id=356" target="_blank" rel="noopener">JSR 338</a>)</li>
-<li>JMS (<a href="https://www.jcp.org/en/jsr/detail?id=356" target="_blank" rel="noopener">JSR 914</a>)</li>
-<li>以及必要时用于事务协调的JTA / JCA设置</li>
-</ul>
-<p>Spring Framework也支持Dependency Injection(<a href="https://www.jcp.org/en/jsr/detail?id=330" target="_blank" rel="noopener">JSR 330</a>)和一般注解(<a href="https://www.jcp.org/en/jsr/detail?id=250" target="_blank" rel="noopener">JSR 250</a>)规范，应用程序开发人员可以选择这些规范来使用，替代Spring Framework提供的Spring特定机制。</p>
-<p>从Spring5开始，Spring需要Java EE 7级别（例如Servlet 3.1，JPA 2.1）作为最低要求，同时在运行时遇到Java EE 8级别的新API（例如Servlet 4.0，JSON绑定API），提供开箱即用的集成。这使得Spring完全兼容Tomcat 8和9，WebSphere 9和JBoss EAP 7。</p>
-<p>随着时间的推移，Java EE在应用程序开发中的角色也在不断演变。在Java EE和Spring的早期，创建应用程序以部署到应用程序服务器，而今天，在Spring Boot的帮助下，应用程序以一种灵活易用的方式创建，比如嵌入 servlet 容器和小的的更改。从 Spring Framework 5开始, webflux 应用程序甚至不直接使用 servlet api, 并且可以在不是 servlet 容器的服务器 (如 netty) 上运行。</p>
-<p>Spring不断创新和发展，除了Spring Framework之外, 还有其他项目, 如Spring Boot, Spring Security, Spring Data, Spring Cloud, Spring Batch等，请务必记住, 每个项目都有自己的源代码存储库、问题跟踪器和发布节奏。有关 spring 项目的完整列表, 请参阅 <a href="https://spring.io/projects" target="_blank" rel="noopener">spring.io/projects</a>。</p>
-<h4 id="3-设计哲学"><a href="#3-设计哲学" class="headerlink" title="3. 设计哲学"></a>3. 设计哲学</h4><p>当您了解框架时，重要的是不仅要知道它的作用，还要了解它遵循的原则。以下是Spring Framework的指导原则：</p>
-<ul>
-<li>提供各个级别的选择。spring 允许您尽可能延迟设计决策。例如, 您可以通过配置切换持久性提供程序, 而无需更改代码。许多其他基础架构相关问题以及与第三方 api 的集成也是如此</li>
-<li>适应不同的观点。Spring是灵活的, 对事情应该如何做并不固执己见，它以不同的视角支持广泛的应用需求。</li>
-<li>保持强大的向后兼容性。Spring的演变被精心管理, 使不同版本之间的重大变化很少。Spring 支持精心选择的 jdk 版本和第三方库, 以方便维护依赖于 spring 的应用程序和库</li>
-<li>关注 api 设计。spring 团队在制作具有直观性且可在多个版本和多年中保持不变的 api 时投入了大量的思考和时间</li>
-<li>为代码质量设置高标准。Spring Framework非常强调有意义的、当前的和准确的 javadoc。它是极少数能够声明干净的代码结构而在包之间没有循环依赖关系的项目之一。</li>
-</ul>
-<h4 id="4-反馈和贡献"><a href="#4-反馈和贡献" class="headerlink" title="4. 反馈和贡献"></a>4. 反馈和贡献</h4><p>对于操作方法问题或诊断或调试问题，我们建议您使用<a href="https://stackoverflow.com/" target="_blank" rel="noopener">StackOverflow</a>,我们有一个<a href="https://spring.io/questions" target="_blank" rel="noopener">问题页面</a>, 列出建议使用的标签。如果您相当确定 spring 框架中存在问题, 或者希望建议某个功能, 请使用 <a href="https://jira.spring.io/projects/SPR/issues" target="_blank" rel="noopener">jira</a> 问题跟踪器。</p>
-<p>如果您有一个解决方案或建议的修复程序, 您可以提交 <a href="https://github.com/spring-projects/spring-framework" target="_blank" rel="noopener">github</a> 上的拉请求。但是, 请记住, 对于所有 (最琐碎的问题除外), 我们希望在问题跟踪器中提交票证, 并留下一份记录供将来参考。</p>
-<p>有关详细信息, 请参阅 ‘<a href="https://github.com/spring-projects/spring-framework/blob/master/CONTRIBUTING.md" target="_blank" rel="noopener">CONTRIBUTING</a>‘ 顶级项目页面中的指南。</p>
-<h4 id="5-入门"><a href="#5-入门" class="headerlink" title="5. 入门"></a>5. 入门</h4><p>如果您刚开始使用 spring, 则可能需要通过创建基于 <a href="http://spring.io/projects/spring-boot" target="_blank" rel="noopener">Spring Boot</a>的应用程序来开始使用 spring 框架。Spring Boot提供了一种快速 (和固执己见) 的方法来创建一个生产就绪的基于 spring 的应用程序。它基于 spring 框架, 约定大于配置, 旨在让您尽快启动和运行。</p>
-<p>您可以使用 <a href="https://start.spring.io/" target="_blank" rel="noopener">start.spring.io</a> 生成基本项目, 也可以遵循 “<a href="https://spring.io/guides" target="_blank" rel="noopener">Getting Started</a>” 指南, 例如 ‘<a href="https://spring.io/guides/gs/rest-service/" target="_blank" rel="noopener">Getting Started Building a RESTful Web Service</a>‘。除了更容易理解外, 这些指南还非常注重任务, 而且大多数都是基于Spring Boot。它们还涵盖 spring 项目组合中的其他项目, 您在解决特定问题时可能需要考虑这些项目。</p>
+        <h4 id="创建一个web项目"><a href="#创建一个web项目" class="headerlink" title="创建一个web项目"></a>创建一个web项目</h4><p>1、打开IntellJ IDEA创建一个基于gradle构建工具的web项目<img src="http://pmfilr6j2.bkt.clouddn.com/1550477160576ehsu10dl.png" alt="创建空项目"></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://y074085024.github.io/2019/02/12/Spring-Framework概览/" data-id="cjs90d0c7000526pv0htr6nw7" class="article-share-link">Share</a>
+      <a data-url="https://y074085024.github.io/2019/02/16/手写spring-webmvc/" data-id="cjsbask0k000dtbpvv3d9vnpi" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/spring-framework/">spring-framework</a></li></ul>
-
     </footer>
   </div>
   
@@ -144,7 +107,7 @@
 
 
   <nav id="page-nav">
-<a class="extend prev" rel="prev" href="/page/2/">&laquo; 上一页</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/4/">下一页 &raquo;</a>
+<a class="extend prev" rel="prev" href="/page/2/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/4/">Next &raquo;</a>
   </nav>
 
 </section>
@@ -152,13 +115,10 @@
           <aside id="sidebar">
   
     
-
-  
-    
   <div class="widget-wrap">
-    <h3 class="widget-title">标签</h3>
+    <h3 class="widget-title">Categories</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/IntellJ-IDEA/">IntellJ IDEA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring-framework/">spring-framework</a></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/spring/">spring</a></li></ul>
     </div>
   </div>
 
@@ -166,18 +126,28 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">标签云</h3>
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/IntellJ-IDEA/">IntellJ IDEA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Lookup/">Lookup</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring-framework/">spring-framework</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/IntellJ-IDEA/" style="font-size: 10px;">IntellJ IDEA</a> <a href="/tags/hexo/" style="font-size: 20px;">hexo</a> <a href="/tags/spring-framework/" style="font-size: 20px;">spring-framework</a>
+      <a href="/tags/IntellJ-IDEA/" style="font-size: 10px;">IntellJ IDEA</a> <a href="/tags/Lookup/" style="font-size: 10px;">Lookup</a> <a href="/tags/hexo/" style="font-size: 20px;">hexo</a> <a href="/tags/spring-framework/" style="font-size: 20px;">spring-framework</a>
     </div>
   </div>
 
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">归档</h3>
+    <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">二月 2019</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a></li></ul>
     </div>
   </div>
 
@@ -185,9 +155,21 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">最新文章</h3>
+    <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2019/02/22/Method-Injection-应用/">Method Injection 应用</a>
+          </li>
+        
+          <li>
+            <a href="/2019/02/21/Spring-IOC/">Spring IOC</a>
+          </li>
+        
+          <li>
+            <a href="/2019/02/16/手写spring-webmvc/">自己动手写一个spring-webmvc</a>
+          </li>
         
           <li>
             <a href="/2019/02/16/IntellJ-IDEA-依赖自动补全插件/">IntellJ IDEA 依赖自动补全插件</a>
@@ -195,18 +177,6 @@
         
           <li>
             <a href="/2019/02/14/spring-framework-core/">spring-framework(core)</a>
-          </li>
-        
-          <li>
-            <a href="/2019/02/12/Spring-Framework概览/">Spring Framework Overview</a>
-          </li>
-        
-          <li>
-            <a href="/2019/02/04/hexo-admin插件安装/">hexo-admin-qiniu插件安装</a>
-          </li>
-        
-          <li>
-            <a href="/2019/02/04/character-encoding/">character encoding</a>
           </li>
         
       </ul>

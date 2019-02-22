@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>Method Injection 应用 | 求知若渴，虚心若愚</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="bean作用域我们都知道Spring IOC是可以帮助我们自动管理bean的依赖关系的，而且bean有几种作用域可根据需要通过@Scope注解设置，如下图 引出问题一般应用中我们都是用singleton作用域，但是有些线程并发情况下可能要使用prototype，但是bean与bean直接是有依赖关系的，原型的bean引用单例的bean按照我们理解的正确方式运行，可是在单例的bean中依赖了原型的b">
+<meta name="keywords" content="Lookup">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Method Injection 应用">
+<meta property="og:url" content="https://y074085024.github.io/2019/02/22/Method-Injection-应用/index.html">
+<meta property="og:site_name" content="求知若渴，虚心若愚">
+<meta property="og:description" content="bean作用域我们都知道Spring IOC是可以帮助我们自动管理bean的依赖关系的，而且bean有几种作用域可根据需要通过@Scope注解设置，如下图 引出问题一般应用中我们都是用singleton作用域，但是有些线程并发情况下可能要使用prototype，但是bean与bean直接是有依赖关系的，原型的bean引用单例的bean按照我们理解的正确方式运行，可是在单例的bean中依赖了原型的b">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://pmfilr6j2.bkt.clouddn.com/15508144093970lxwxs8h.png">
+<meta property="og:image" content="http://pmfilr6j2.bkt.clouddn.com/15508181668144mcv0yy4.png">
+<meta property="og:updated_time" content="2019-02-22T06:04:30.825Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Method Injection 应用">
+<meta name="twitter:description" content="bean作用域我们都知道Spring IOC是可以帮助我们自动管理bean的依赖关系的，而且bean有几种作用域可根据需要通过@Scope注解设置，如下图 引出问题一般应用中我们都是用singleton作用域，但是有些线程并发情况下可能要使用prototype，但是bean与bean直接是有依赖关系的，原型的bean引用单例的bean按照我们理解的正确方式运行，可是在单例的bean中依赖了原型的b">
+<meta name="twitter:image" content="http://pmfilr6j2.bkt.clouddn.com/15508144093970lxwxs8h.png">
+  
+    <link rel="alternate" href="/atom.xml" title="求知若渴，虚心若愚" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">求知若渴，虚心若愚</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://y074085024.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Method-Injection-应用" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/02/22/Method-Injection-应用/" class="article-date">
+  <time datetime="2019-02-22T04:52:00.000Z" itemprop="datePublished">2019-02-22</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/spring/">spring</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Method Injection 应用
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+<div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#bean作用域"><span class="toc-text">bean作用域</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#引出问题"><span class="toc-text">引出问题</span></a></li></ol>
+    </div>
+        <h4 id="bean作用域"><a href="#bean作用域" class="headerlink" title="bean作用域"></a>bean作用域</h4><p>我们都知道Spring IOC是可以帮助我们自动管理bean的依赖关系的，而且bean有几种作用域可根据需要通过@Scope注解设置，如下图<img src="http://pmfilr6j2.bkt.clouddn.com/15508144093970lxwxs8h.png" alt="bean的作用域"></p>
+<h4 id="引出问题"><a href="#引出问题" class="headerlink" title="引出问题"></a>引出问题</h4><p>一般应用中我们都是用singleton作用域，但是有些线程并发情况下可能要使用prototype，但是bean与bean直接是有依赖关系的，原型的bean引用单例的bean按照我们理解的正确方式运行，可是在单例的bean中依赖了原型的bean就会跟我们想的不一样，单例的bean会在容器初始化时被注册到容器中，这里我们不考虑lazy=true情况，该bean所依赖bean也会在被直接注入，但是在使用该单例bean时，容器会直接从缓存中拿出来，并没有机会再次交给容器去从新注入依赖，所以就会出现意想不到的效果。我在实际开发中遇到过这种例子，直接上代码</p>
+<ul>
+<li>@Lookup方式</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Componet</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">ChildChannelInitHandler</span> <span class="keyword">extends</span> <span class="title">ChannelInitializer</span>&lt;<span class="title">SocketChannel</span>&gt; </span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 业务处理线程池，防止业务处理过慢阻塞I/O线程</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> EventLoopGroup group = <span class="keyword">new</span> NioEventLoopGroup();</span><br><span class="line">    <span class="meta">@Resource</span></span><br><span class="line">    <span class="keyword">private</span> DispatcherHandler dispatcherHandler;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">initChannel</span><span class="params">(SocketChannel ch)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        ChannelPipeline pipeline = ch.pipeline();</span><br><span class="line">        pipeline.addLast(<span class="string">"frameDecoder"</span>,createLengthFieldBasedFrameDecoder());</span><br><span class="line">        pipeline.addLast(group,<span class="string">"dispatcherHandler"</span>,dispatcherHandler);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Lookup</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">abstract</span> LengthFieldBasedFrameDecoder <span class="title">createLengthFieldBasedFrameDecoder</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ServerConfig</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Bean</span>(<span class="string">"lengthFieldBasedFrameDecoder"</span>)</span><br><span class="line">    <span class="meta">@Scope</span>(<span class="string">"prototype"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> LengthFieldBasedFrameDecoder <span class="title">createLengthFieldBasedFrameDecoder</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> LengthFieldBasedFrameDecoder(ByteOrder.LITTLE_ENDIAN, ProtocolConstant.MAX_LENGTH,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="keyword">true</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>ChildChannelInitHandler是单例的有main channel调用处理新加入的连接，但是LengthFieldBasedFrameDecoder是线程不安全的，所以不能在netty的child channel pipeline中共享单例的LengthFieldBasedFrameDecoder实例对象，所以需要每次调用initChannel方法时创建一个新的LengthFieldBasedFrameDecoder实例，创建一个抽象的类使用@Lookup注解方式可以实现不同作用域的bean相互依赖的问题。@Lookup根据方法返回类型进行byType方式注入，如果指定了@Lookup的属性值根据指定的beanName进行注入。<img src="http://pmfilr6j2.bkt.clouddn.com/15508181668144mcv0yy4.png" alt="Lookup注解"></p>
+<ul>
+<li>实现ApplicationContextAware接口方式</li>
+</ul>
+<p>这种方式很简单我就不具体演示了，但是缺点是具有代码侵入性，自己的业务类引用了Spring的API，这种方式其实就是我们之前文章说DI三种注入方式的interface注入</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://y074085024.github.io/2019/02/22/Method-Injection-应用/" data-id="cjsfn8oz50000zmpv0bh85si4" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Lookup/">Lookup</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2019/02/21/Spring-IOC/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Spring IOC</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/spring/">spring</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/IntellJ-IDEA/">IntellJ IDEA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Lookup/">Lookup</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring-framework/">spring-framework</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/IntellJ-IDEA/" style="font-size: 10px;">IntellJ IDEA</a> <a href="/tags/Lookup/" style="font-size: 10px;">Lookup</a> <a href="/tags/hexo/" style="font-size: 20px;">hexo</a> <a href="/tags/spring-framework/" style="font-size: 20px;">spring-framework</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/02/22/Method-Injection-应用/">Method Injection 应用</a>
+          </li>
+        
+          <li>
+            <a href="/2019/02/21/Spring-IOC/">Spring IOC</a>
+          </li>
+        
+          <li>
+            <a href="/2019/02/16/手写spring-webmvc/">自己动手写一个spring-webmvc</a>
+          </li>
+        
+          <li>
+            <a href="/2019/02/16/IntellJ-IDEA-依赖自动补全插件/">IntellJ IDEA 依赖自动补全插件</a>
+          </li>
+        
+          <li>
+            <a href="/2019/02/14/spring-framework-core/">spring-framework(core)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 xly<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
