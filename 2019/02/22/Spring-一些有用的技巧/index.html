@@ -3,15 +3,23 @@
 <head><meta name="generator" content="Hexo 3.8.0">
   <meta charset="utf-8">
   
-  <title>求知若渴，虚心若愚</title>
+  <title>Spring 一些有用的技能 | 求知若渴，虚心若愚</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="求知若渴，虚心若愚">
-<meta property="og:url" content="https://y074085024.github.io/index.html">
+  <meta name="description" content="@DependsOnspring官方文档上说的很清楚，对于一个bean是另外一个bean的属性的情况属于直接依赖，但是业务中可能还有一些间接依赖，所以需要通过此注解指定，比如一些静态代码块的加载顺序，数据库的加载顺序等，其实这个有点类似于volatile的防止指令重排序的作用123456789// 线程1执行initContext();volatile boolean flag = true;//">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spring 一些有用的技能">
+<meta property="og:url" content="https://y074085024.github.io/2019/02/22/Spring-一些有用的技巧/index.html">
 <meta property="og:site_name" content="求知若渴，虚心若愚">
+<meta property="og:description" content="@DependsOnspring官方文档上说的很清楚，对于一个bean是另外一个bean的属性的情况属于直接依赖，但是业务中可能还有一些间接依赖，所以需要通过此注解指定，比如一些静态代码块的加载顺序，数据库的加载顺序等，其实这个有点类似于volatile的防止指令重排序的作用123456789// 线程1执行initContext();volatile boolean flag = true;//">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://pmfilr6j2.bkt.clouddn.com/1550843517025fqwj5tuf.png">
+<meta property="og:image" content="http://pmfilr6j2.bkt.clouddn.com/15508454082865u2deo20.png">
+<meta property="og:image" content="http://pmfilr6j2.bkt.clouddn.com/1550886351969w9f4lynd.png">
+<meta property="og:updated_time" content="2019-02-23T01:51:43.115Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="求知若渴，虚心若愚">
+<meta name="twitter:title" content="Spring 一些有用的技能">
+<meta name="twitter:description" content="@DependsOnspring官方文档上说的很清楚，对于一个bean是另外一个bean的属性的情况属于直接依赖，但是业务中可能还有一些间接依赖，所以需要通过此注解指定，比如一些静态代码块的加载顺序，数据库的加载顺序等，其实这个有点类似于volatile的防止指令重排序的作用123456789// 线程1执行initContext();volatile boolean flag = true;//">
+<meta name="twitter:image" content="http://pmfilr6j2.bkt.clouddn.com/1550843517025fqwj5tuf.png">
   
     <link rel="alternate" href="/atom.xml" title="求知若渴，虚心若愚" type="application/atom+xml">
   
@@ -60,9 +68,7 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-    <article id="post-Spring-一些有用的技巧" class="article article-type-post" itemscope="" itemprop="blogPost">
+        <section id="main"><article id="post-Spring-一些有用的技巧" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/02/22/Spring-一些有用的技巧/" class="article-date">
   <time datetime="2019-02-22T13:38:03.000Z" itemprop="datePublished">2019-02-22</time>
@@ -75,8 +81,8 @@
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/02/22/Spring-一些有用的技巧/">Spring 一些有用的技能</a>
+    <h1 class="article-title" itemprop="name">
+      Spring 一些有用的技能
     </h1>
   
 
@@ -106,16 +112,20 @@
     </footer>
   </div>
   
-</article>
-
-
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2019/02/22/Method-Injection-应用/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Method Injection 应用</div>
+    </a>
+  
+</nav>
 
   
+</article>
 
-
-  <nav id="page-nav">
-<span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
-  </nav>
 
 </section>
         

@@ -13,7 +13,7 @@
 <meta property="og:description" content="什么是IOC？Inverse of control简称ioc，即控制反转，是Michael Mattson在1996年的一篇有关探讨面向对象框架的文章中提出的。IOC实际是一种思想，一种抽象的概念，主要有3中实现依赖注入（Dependency Injection）、依赖查找（Dependency lookup）、依赖拖拽（Dependency pull）。  DI有三种方式：setter，cons">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://pmfilr6j2.bkt.clouddn.com/15508053771078vcgzbcw.png">
-<meta property="og:updated_time" content="2019-02-22T05:57:58.735Z">
+<meta property="og:updated_time" content="2019-02-23T01:42:10.813Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Spring IOC">
 <meta name="twitter:description" content="什么是IOC？Inverse of control简称ioc，即控制反转，是Michael Mattson在1996年的一篇有关探讨面向对象框架的文章中提出的。IOC实际是一种思想，一种抽象的概念，主要有3中实现依赖注入（Dependency Injection）、依赖查找（Dependency lookup）、依赖拖拽（Dependency pull）。  DI有三种方式：setter，cons">
@@ -94,7 +94,7 @@
       
 <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
-        <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#什么是IOC？"><span class="toc-text">什么是IOC？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#什么是依赖？"><span class="toc-text">什么是依赖？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#为什么要使用IOC？"><span class="toc-text">为什么要使用IOC？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Spring-IOC-简单应用"><span class="toc-text">Spring IOC 简单应用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#自动装配"><span class="toc-text">自动装配</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#什么是自动装配"><span class="toc-text">什么是自动装配</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#自动装配方式"><span class="toc-text">自动装配方式</span></a></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#什么是IOC？"><span class="toc-text">什么是IOC？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#什么是依赖？"><span class="toc-text">什么是依赖？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#为什么要使用IOC？"><span class="toc-text">为什么要使用IOC？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Spring-IOC-简单应用"><span class="toc-text">Spring IOC 简单应用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#自动装配"><span class="toc-text">自动装配</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#什么是自动装配"><span class="toc-text">什么是自动装配</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#自动装配方式"><span class="toc-text">自动装配方式</span></a></li></ol></li></ol><li class="toc-item toc-level-4"><a class="toc-link" href="#Bean-生命周期的回调"><span class="toc-text">Bean 生命周期的回调</span></a></li>
     </div>
         <h4 id="什么是IOC？"><a href="#什么是IOC？" class="headerlink" title="什么是IOC？"></a>什么是IOC？</h4><p>Inverse of control简称ioc，即控制反转，是Michael Mattson在1996年的一篇有关探讨面向对象框架的文章中提出的。IOC实际是一种思想，一种抽象的概念，主要有3中实现依赖注入（Dependency Injection）、依赖查找（Dependency lookup）、依赖拖拽（Dependency pull）。</p>
 <ul>
@@ -161,7 +161,7 @@
 </tbody>
 </table>
 <ul>
-<li>我自己使用的Spring 5.x测试</li>
+<li>我自己使用的Spring 5.x测试，从测试结果来看并不能看出装配顺序，源码中有体现</li>
 </ul>
 <table>
 <thead>
@@ -173,7 +173,7 @@
 <tbody>
 <tr>
 <td>@Autowired</td>
-<td>byName-&gt;byType</td>
+<td>byType-&gt;byName</td>
 </tr>
 <tr>
 <td>@Resource</td>
@@ -185,12 +185,19 @@
 </tr>
 </tbody>
 </table>
-<p><em>@Resource如果有设置name属性那么就根据by name of @Resource-&gt;byName-&gt;byType。三种注解都可以附加@Qualifier，如果增加了@Qualifier那么只会根据byName方式注入，并不会在byName注入失败时在通过byType注入</em></p>
+<p><em>@Resource如果有设置name属性那么就根据by name of @Resource-&gt;byName-&gt;byType。三种注解都可以附加@Qualifier，如果增加了@Qualifier那么只会根据byName方式注入，并不会在byName注入失败时在通过byType注入。如果存在多个相同的待注入类型时可以使用@Primary注解指定选择哪个</em></p>
+<h4 id="Bean-生命周期的回调"><a href="#Bean-生命周期的回调" class="headerlink" title="Bean 生命周期的回调"></a>Bean 生命周期的回调</h4><p>spring ioc提供了多种方式</p>
+<ul>
+<li>实现接口：InitializingBean和DisposableBean</li>
+<li>xml配置：配置init和destroy属性</li>
+<li>注解：@PostConstruct和@PreDestroy</li>
+</ul>
+<p>这几种方式都是在bean初始化调用完构造函数之后和bean刚要销毁时回调的，推荐使用注解方式，因为没有代码侵入性。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://y074085024.github.io/2019/02/21/Spring-IOC/" data-id="cjsfnjvug00071tpv17xui8iy" class="article-share-link">Share</a>
+      <a data-url="https://y074085024.github.io/2019/02/21/Spring-IOC/" data-id="cjsgubnga0007s6pv3nmwjnka" class="article-share-link">Share</a>
       
       
     </footer>
@@ -270,6 +277,10 @@
       <ul>
         
           <li>
+            <a href="/2019/02/22/Spring-一些有用的技巧/">Spring 一些有用的技能</a>
+          </li>
+        
+          <li>
             <a href="/2019/02/22/Method-Injection-应用/">Method Injection 应用</a>
           </li>
         
@@ -283,10 +294,6 @@
         
           <li>
             <a href="/2019/02/16/IntellJ-IDEA-依赖自动补全插件/">IntellJ IDEA 依赖自动补全插件</a>
-          </li>
-        
-          <li>
-            <a href="/2019/02/14/spring-framework-core/">spring-framework(core)</a>
           </li>
         
       </ul>

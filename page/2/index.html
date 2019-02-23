@@ -62,10 +62,10 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-Spring-IOC" class="article article-type-post" itemscope="" itemprop="blogPost">
+    <article id="post-Method-Injection-应用" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2019/02/21/Spring-IOC/" class="article-date">
-  <time datetime="2019-02-21T11:30:00.000Z" itemprop="datePublished">2019-02-21</time>
+    <a href="/2019/02/22/Method-Injection-应用/" class="article-date">
+  <time datetime="2019-02-22T04:52:00.000Z" itemprop="datePublished">2019-02-22</time>
 </a>
     
   <div class="article-category">
@@ -80,7 +80,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/02/21/Spring-IOC/">Spring IOC</a>
+      <a class="article-title" href="/2019/02/22/Method-Injection-应用/">Method Injection 应用</a>
     </h1>
   
 
@@ -90,105 +90,29 @@
       
 <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
-        <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#什么是IOC？"><span class="toc-text">什么是IOC？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#什么是依赖？"><span class="toc-text">什么是依赖？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#为什么要使用IOC？"><span class="toc-text">为什么要使用IOC？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Spring-IOC-简单应用"><span class="toc-text">Spring IOC 简单应用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#自动装配"><span class="toc-text">自动装配</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#什么是自动装配"><span class="toc-text">什么是自动装配</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#自动装配方式"><span class="toc-text">自动装配方式</span></a></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#bean作用域"><span class="toc-text">bean作用域</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#引出问题"><span class="toc-text">引出问题</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#例子-Netty-Spring"><span class="toc-text">例子 Netty+Spring</span></a></li></ol>
     </div>
-        <h4 id="什么是IOC？"><a href="#什么是IOC？" class="headerlink" title="什么是IOC？"></a>什么是IOC？</h4><p>Inverse of control简称ioc，即控制反转，是Michael Mattson在1996年的一篇有关探讨面向对象框架的文章中提出的。IOC实际是一种思想，一种抽象的概念，主要有3中实现依赖注入（Dependency Injection）、依赖查找（Dependency lookup）、依赖拖拽（Dependency pull）。</p>
+        <h4 id="bean作用域"><a href="#bean作用域" class="headerlink" title="bean作用域"></a>bean作用域</h4><p>我们都知道Spring IOC是可以帮助我们自动管理bean的依赖关系的，而且bean有几种作用域可根据需要通过@Scope注解设置，如下图<img src="http://pmfilr6j2.bkt.clouddn.com/15508144093970lxwxs8h.png" alt="bean的作用域"></p>
+<h4 id="引出问题"><a href="#引出问题" class="headerlink" title="引出问题"></a>引出问题</h4><p>一般应用中我们都是用singleton作用域，但是有些线程并发情况下可能要使用prototype，但是bean与bean直接是有依赖关系的，原型的bean引用单例的bean按照我们理解的正确方式运行，可是在单例的bean中依赖了原型的bean就会跟我们想的不一样，单例的bean会在容器初始化时被注册到容器中，这里我们不考虑lazy=true情况，该bean所依赖bean也会在被直接注入，但是在使用该单例bean时，容器会直接从缓存中拿出来，并没有机会再次交给容器去从新注入依赖，所以就会出现出乎意料的结果。</p>
+<h4 id="例子-Netty-Spring"><a href="#例子-Netty-Spring" class="headerlink" title="例子 Netty+Spring"></a>例子 Netty+Spring</h4><p>我在实际开发中遇到过这种例子，直接上代码</p>
 <ul>
-<li>DI有三种方式：setter，constructor，interface。interface好像是在spring3之后就不用了，Spring中ApplicationContextAware的实现方式类似interface注入</li>
-<li>DL可以看看JNDI，简单说就是给容器提供一个关键字，容器会返回相应的实例</li>
-<li>DP这个方式和DL很像，例如applicationContext.getBean(“beanName”);</li>
+<li>@Lookup方式</li>
 </ul>
-<h4 id="什么是依赖？"><a href="#什么是依赖？" class="headerlink" title="什么是依赖？"></a>什么是依赖？</h4><p>理解依赖注入首先要弄清除什么是依赖，比如类A中有一个属性是类B或者是类A的方法中使用了类B，那么我们就说类A依赖于类B<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">A</span> </span>&#123;</span><br><span class="line">	<span class="keyword">private</span> B b;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">dosomething</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		...</span><br><span class="line">		b.method();</span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">B</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">method</span><span class="params">()</span></span>&#123;</span><br><span class="line">    	...</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h4 id="为什么要使用IOC？"><a href="#为什么要使用IOC？" class="headerlink" title="为什么要使用IOC？"></a>为什么要使用IOC？</h4><p>解耦，将实现全部交由ioc管理，这样我们的业务与具体实现解耦，只需面向抽象编程，方便代码维护；spring ioc容器还提供了很多其他的功能，比如提供动态代理和cglib代理，基于这些代理可以为目标对象增加很多功能。</p>
-<h4 id="Spring-IOC-简单应用"><a href="#Spring-IOC-简单应用" class="headerlink" title="Spring IOC 简单应用"></a>Spring IOC 简单应用</h4><p>如果要将自己的类交由容器管理，需要提供给容器相应的元数据，容器才可以进行管理，Spring提供元数据的方式主要有xml、annotation、javaconfig。这三种方式可以混合使用，互不冲突。annotation方式需要通过xml或javaconfig开启注解。<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">beans</span>&gt;</span></span><br><span class="line">   <span class="comment">&lt;!--开启注解,在spring3之后的版本可以不用添加此标签，因为扫描变标签已经默认开启了注解--&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">context:annotation-config</span>/&gt;</span></span><br><span class="line">   <span class="comment">&lt;!--扫描类--&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">context:component-scan</span> <span class="attr">base-package</span>=<span class="string">"com"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
-<p>javaconfig使用@CompomentScan(“com”)进行注解类扫描，@Configuration不会影类的扫描以及@Bean的功能，它的作用是指定类使用cglib代理，后续文章中会具体说明。</p>
-<h4 id="自动装配"><a href="#自动装配" class="headerlink" title="自动装配"></a>自动装配</h4><h6 id="什么是自动装配"><a href="#什么是自动装配" class="headerlink" title="什么是自动装配"></a>什么是自动装配</h6><p>自动装配是不需要提供明确的依赖关系元数据(比如xml中的&lt;property&gt;)，容器可以通过类的定义信息自动完成依赖注入。虽然这种依赖关系（没有指明具体实现）的描述不是很明确，但是大致可以按照type或name的方式找出相应的依赖关系，从而完成自动装配，这样的话可以减少xml的配置，又可以动态改变类的依赖而不需要修改配置文件。<img src="http://pmfilr6j2.bkt.clouddn.com/15508053771078vcgzbcw.png" alt="自动装配的局限性与缺点"></p>
-<h6 id="自动装配方式"><a href="#自动装配方式" class="headerlink" title="自动装配方式"></a>自动装配方式</h6><ol>
-<li>xml方式</li>
-</ol>
-<table>
-<thead>
-<tr>
-<th>方式</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>byType</td>
-<td>按照setter中参数的类型自动装配，会依次调用所有容器中已注册bean与setter参数类型相同的setter方法</td>
-</tr>
-<tr>
-<td>byName</td>
-<td>按照setter中set后边的字符串首字母小写的容器中已存在的beanName进行依次调用setter方法</td>
-</tr>
-<tr>
-<td>constructor</td>
-<td>按照byType方式匹配参数，选出做多的匹配的参数的构造函数调用，如果存在多个在按照constructor在数组中的顺序调用第一个</td>
-</tr>
-</tbody>
-</table>
-<ol start="2">
-<li>注解方式</li>
-</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Componet</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">ChildChannelInitHandler</span> <span class="keyword">extends</span> <span class="title">ChannelInitializer</span>&lt;<span class="title">SocketChannel</span>&gt; </span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 业务处理线程池，防止业务处理过慢阻塞I/O线程</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> EventLoopGroup group = <span class="keyword">new</span> NioEventLoopGroup();</span><br><span class="line">    <span class="meta">@Resource</span></span><br><span class="line">    <span class="keyword">private</span> DispatcherHandler dispatcherHandler;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">initChannel</span><span class="params">(SocketChannel ch)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        ChannelPipeline pipeline = ch.pipeline();</span><br><span class="line">        pipeline.addLast(<span class="string">"frameDecoder"</span>,createLengthFieldBasedFrameDecoder());</span><br><span class="line">        pipeline.addLast(group,<span class="string">"dispatcherHandler"</span>,dispatcherHandler);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Lookup</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">abstract</span> LengthFieldBasedFrameDecoder <span class="title">createLengthFieldBasedFrameDecoder</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ServerConfig</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Bean</span>(<span class="string">"lengthFieldBasedFrameDecoder"</span>)</span><br><span class="line">    <span class="meta">@Scope</span>(<span class="string">"prototype"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> LengthFieldBasedFrameDecoder <span class="title">createLengthFieldBasedFrameDecoder</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> LengthFieldBasedFrameDecoder(ByteOrder.LITTLE_ENDIAN, ProtocolConstant.MAX_LENGTH,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="keyword">true</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>ChildChannelInitHandler是单例的有main channel调用处理新加入的连接，但是LengthFieldBasedFrameDecoder是线程不安全的，所以不能在netty的child channel pipeline中共享单例的LengthFieldBasedFrameDecoder实例对象，所以需要每次调用initChannel方法时创建一个新的LengthFieldBasedFrameDecoder实例，创建一个类（Spring会自动检查类中是否加了@Lookup，然后生成CGLib代理，目标类是非抽象类也可以，只不过被注解的方法体是不起作用的）使用@Lookup注解方式可以实现不同作用域的bean相互依赖的问题。@Lookup根据方法返回类型进行byType方式注入，如果指定了@Lookup的属性值根据指定的beanName进行注入。<img src="http://pmfilr6j2.bkt.clouddn.com/15508181668144mcv0yy4.png" alt="Lookup注解"></p>
 <ul>
-<li>网上很多资料，可能是之前版本的spring是这样处理</li>
+<li>实现ApplicationContextAware接口方式</li>
 </ul>
-<table>
-<thead>
-<tr>
-<th>注解</th>
-<th>自动装配顺序</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>@Autowired</td>
-<td>byType</td>
-</tr>
-<tr>
-<td>@Resource</td>
-<td>byName-&gt;byType</td>
-</tr>
-<tr>
-<td>@Inject</td>
-<td>和@Autowired一样</td>
-</tr>
-</tbody>
-</table>
-<ul>
-<li>我自己使用的Spring 5.x测试</li>
-</ul>
-<table>
-<thead>
-<tr>
-<th>注解</th>
-<th>自动装配顺序</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>@Autowired</td>
-<td>byName-&gt;byType</td>
-</tr>
-<tr>
-<td>@Resource</td>
-<td>byName-&gt;byType</td>
-</tr>
-<tr>
-<td>@Inject</td>
-<td>和@Autowired一样</td>
-</tr>
-</tbody>
-</table>
-<p><em>@Resource如果有设置name属性那么就根据by name of @Resource-&gt;byName-&gt;byType。三种注解都可以附加@Qualifier，如果增加了@Qualifier那么只会根据byName方式注入，并不会在byName注入失败时在通过byType注入</em></p>
+<p>这种方式很简单我就不具体演示了，但是缺点是具有代码侵入性，自己的业务类引用了Spring的API，这种方式其实就是我们之前文章说DI三种注入方式的interface注入</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://y074085024.github.io/2019/02/21/Spring-IOC/" data-id="cjsfnjvug00071tpv17xui8iy" class="article-share-link">Share</a>
+      <a data-url="https://y074085024.github.io/2019/02/22/Method-Injection-应用/" data-id="cjsgubng00004s6pvoxfwc2h2" class="article-share-link">Share</a>
       
       
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Lookup/">Lookup</a></li></ul>
+
     </footer>
   </div>
   
@@ -200,7 +124,7 @@
 
 
   <nav id="page-nav">
-<a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
+<a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
   </nav>
 
 </section>
@@ -253,6 +177,10 @@
       <ul>
         
           <li>
+            <a href="/2019/02/22/Spring-一些有用的技巧/">Spring 一些有用的技能</a>
+          </li>
+        
+          <li>
             <a href="/2019/02/22/Method-Injection-应用/">Method Injection 应用</a>
           </li>
         
@@ -266,10 +194,6 @@
         
           <li>
             <a href="/2019/02/16/IntellJ-IDEA-依赖自动补全插件/">IntellJ IDEA 依赖自动补全插件</a>
-          </li>
-        
-          <li>
-            <a href="/2019/02/14/spring-framework-core/">spring-framework(core)</a>
           </li>
         
       </ul>
