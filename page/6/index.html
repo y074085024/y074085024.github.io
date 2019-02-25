@@ -62,10 +62,10 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-spring-framework-core" class="article article-type-post" itemscope="" itemprop="blogPost">
+    <article id="post-IntellJ-IDEA-依赖自动补全插件" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2019/02/14/spring-framework-core/" class="article-date">
-  <time datetime="2019-02-14T01:20:00.000Z" itemprop="datePublished">2019-02-14</time>
+    <a href="/2019/02/16/IntellJ-IDEA-依赖自动补全插件/" class="article-date">
+  <time datetime="2019-02-16T02:36:00.000Z" itemprop="datePublished">2019-02-16</time>
 </a>
     
   </div>
@@ -76,7 +76,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/02/14/spring-framework-core/">spring-framework(core)</a>
+      <a class="article-title" href="/2019/02/16/IntellJ-IDEA-依赖自动补全插件/">IntellJ IDEA 依赖自动补全插件</a>
     </h1>
   
 
@@ -86,33 +86,43 @@
       
 <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#核心技术"><span class="toc-text">核心技术</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-IOC容器"><span class="toc-text">1. IOC容器</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#1-1-Spring-IOC容器和Beans简介"><span class="toc-text">1.1. Spring IOC容器和Beans简介</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#1-2-容器概览"><span class="toc-text">1.2. 容器概览</span></a></li></ol></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#安装GradleDependencyHelper插件"><span class="toc-text">安装GradleDependencyHelper插件</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#IntellJ-IDEA仓库中的插件（github）"><span class="toc-text">IntellJ IDEA仓库中的插件（github）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#JetBrains-Plugins-Repository中的插件-github"><span class="toc-text">JetBrains Plugins Repository中的插件(github)</span></a></li></ol></li></ol>
     </div>
-        <h2 id="核心技术"><a href="#核心技术" class="headerlink" title="核心技术"></a><a href="https://docs.spring.io/spring-framework/docs/current/spring-framework-reference/core.html" target="_blank" rel="noopener">核心技术</a></h2><p>Version 5.1.4.RELEASE</p>
-<hr>
-<p><strong>这部分参考文档涵盖所有Spring Framework完整技术。</strong></p>
-<p>其中很重要的一部分是Spring Framework的控制反转（IOC）容器。对 Spring Framework 的 ioc 容器进行彻底理解之后, 将全面介绍 spring 面向切面的编程 (aop) 技术。Spring Framework有自己的aop框架，概念上很容易理解, 它成功地解决了 java 企业编程中 aop 需求的80%。  </p>
-<p>Spring与AspectJ（目前在功能方面是最丰富的, 当然也是 java 企业领域中最成熟的 aop 实现）的集成内容也有提供</p>
-<h4 id="1-IOC容器"><a href="#1-IOC容器" class="headerlink" title="1. IOC容器"></a>1. IOC容器</h4><p>本章包含Spring的IOC容器方面的内容</p>
-<h6 id="1-1-Spring-IOC容器和Beans简介"><a href="#1-1-Spring-IOC容器和Beans简介" class="headerlink" title="1.1. Spring IOC容器和Beans简介"></a>1.1. Spring IOC容器和Beans简介</h6><p>本章涵盖Spring Framework实现控制反转的原则（<a href="https://y074085024.github.io/2019/02/12/Spring-Framework%E6%A6%82%E8%A7%88/">Spring Framework概览</a>）。IOC 也称为依赖关系注入 (DI)，他是一个过程，根据这个过程定义对象的依赖关系（也就是说, 他们使用的其他对象），通过构造参数、工厂方法参数传递实例，在对象构造完成后设置对象的属性或者从工厂方法中返回，然后当bean返回的时候容器负责将依赖关系注入，这个过程从根本上说是反过来的（因此得名, 控制反转），通过使用类或服务定位器模式等机制的直接构造来控制其依赖项的实例化或位置。</p>
-<p>org.springframework.beans和org.springframework.context这两个包是Spring IOC的基础。BeanFactory接口提供了高级配置的机制可以管理任何类型的对象。ApplicationContext是BeanFactory的子接口，它增加了如下功能：</p>
+        <h2 id="安装GradleDependencyHelper插件"><a href="#安装GradleDependencyHelper插件" class="headerlink" title="安装GradleDependencyHelper插件"></a>安装GradleDependencyHelper插件</h2><h4 id="IntellJ-IDEA仓库中的插件（github）"><a href="#IntellJ-IDEA仓库中的插件（github）" class="headerlink" title="IntellJ IDEA仓库中的插件（github）"></a>IntellJ IDEA仓库中的插件（<a href="https://github.com/AbbyJM/GradleDependencyHelper" target="_blank" rel="noopener">github</a>）</h4><ol>
+<li><p>安装</p>
 <ul>
-<li>集成Spring AOP很容易</li>
-<li>消息资源的处理（用于国际化）</li>
-<li>事件发布</li>
-<li>应用层特殊的上下文，如在web应用中使用的WebApplicationContext</li>
+<li><p>需要在File-&gt;Settings-&gt;Plugins菜单中选择Browse Repository…,如下图：<img src="http://pmfilr6j2.bkt.clouddn.com/155028487544758jkvajg.png" alt="paste image"></p>
+</li>
+<li><p>然后搜索GradleDependencyHelper，点击Install<img src="http://pmfilr6j2.bkt.clouddn.com/1550285112343qlwlhmee.png" alt="paste image"></p>
+</li>
 </ul>
-<p>简言之，BeanFactory提供了一个配置框架和基础功能，ApplicationContext提供了更多企业定制的功能。ApplicationContext是BeanFactory的一个完整的超集，仅仅在本章中描述Spring IOC容器时使用。关于更多替代ApplictionContext的BeanFactory的用法，请看<a href="https://docs.spring.io/spring-framework/docs/current/spring-framework-reference/core.html#beans-beanfactory" target="_blank" rel="noopener">The BeanFactory</a></p>
-<p>在Spring中，对象形成了应用程序的骨架，他们被Spring IOC容器进行管理，在容器中叫做beans。bean 是由 spring ioc 容器实例化、组装和以其他方式管理的对象。因此，一个bean是你应用程序中众多对象中的一个，Beans的互相依赖关系反映在容器使用的配置元数据中。</p>
-<h6 id="1-2-容器概览"><a href="#1-2-容器概览" class="headerlink" title="1.2. 容器概览"></a>1.2. 容器概览</h6><p>org.springframework.context.ApplicationContext接口代表了Spring IOC容器，负责实例化、配置和组装beans。容器通过读取配置元数据获取有关要实例化、配置和组装的对象的说明。配置元数据可以是xml、java注解和java代码。它允许您表达组成应用程序的对象以及这些对象之间丰富的相互依存关系。</p>
+</li>
+<li><p>使用</p>
+<ul>
+<li>直接在.gradle文件中输入ArtifactId不会自动补全    </li>
+<li>需要打开Tools-&gt;GDependency菜单，然后输入关键词，搜索<br><img src="http://pmfilr6j2.bkt.clouddn.com/15502857059541iu6vglz.png" alt="paste image"></li>
+<li>找到需要的ArtifactId，双击后选择需要的版本，然后copy，在Ctrl+V到.gradle文件中<br><img src="http://pmfilr6j2.bkt.clouddn.com/15502862105736mzc1mxn.png" alt="paste image"></li>
+</ul>
+</li>
+<li><p>总结</p>
+<p> 相对于直接去maven仓库中搜索，这种使用方法对于开发人员来说并没有方便多少    </p>
+</li>
+</ol>
+<h4 id="JetBrains-Plugins-Repository中的插件-github"><a href="#JetBrains-Plugins-Repository中的插件-github" class="headerlink" title="JetBrains Plugins Repository中的插件(github)"></a><a href="https://plugins.jetbrains.com/" target="_blank" rel="noopener">JetBrains Plugins Repository</a>中的插件(<a href="https://github.com/siosio/GradleDependenciesHelperPlugin" target="_blank" rel="noopener">github</a>)</h4><ol>
+<li>安装<br>由于这个插件在IntellJ IDEA中没有搜索到，所以去官网<a href="https://plugins.jetbrains.com/plugin/7299-gradle-dependencies-helper" target="_blank" rel="noopener">下载</a>插件，下载与上边一样，只不过安装时选择Install plugin from disk.直接选中GradleDependenciesHelperPlugin-<em>.</em>.jar文件安装</li>
+<li>使用<br>直接在.gradle文件中输入你需要依赖的ArtifactId的名称，按shift+ctrl+space会自动提示补全<img src="http://pmfilr6j2.bkt.clouddn.com/15502871284635z9uom19.png" alt="paste image"></li>
+<li><p>总结</p>
+<p> 这个方法与我们平时编程写代码时的自动补全习惯类似，可以加快我们程序猿的开发速度</p>
+</li>
+</ol>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://y074085024.github.io/2019/02/14/spring-framework-core/" data-id="cjsgubnh7000ks6pvkakaapi8" class="article-share-link">Share</a>
+      <a data-url="https://y074085024.github.io/2019/02/16/IntellJ-IDEA-依赖自动补全插件/" data-id="cjsgun0dz0002szpv008o7ili" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/spring-framework/">spring-framework</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/IntellJ-IDEA/">IntellJ IDEA</a></li></ul>
 
     </footer>
   </div>
@@ -125,7 +135,7 @@
 
 
   <nav id="page-nav">
-<a class="extend prev" rel="prev" href="/page/5/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/7/">Next &raquo;</a>
+<a class="extend prev" rel="prev" href="/page/5/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/">12</a><a class="extend next" rel="next" href="/page/7/">Next &raquo;</a>
   </nav>
 
 </section>
@@ -178,6 +188,10 @@
       <ul>
         
           <li>
+            <a href="/2019/02/25/Spring-AOP/">Spring AOP</a>
+          </li>
+        
+          <li>
             <a href="/2019/02/22/Spring-一些有用的技巧/">Spring 一些有用的技能</a>
           </li>
         
@@ -191,10 +205,6 @@
         
           <li>
             <a href="/2019/02/16/手写spring-webmvc/">自己动手写一个spring-webmvc</a>
-          </li>
-        
-          <li>
-            <a href="/2019/02/16/IntellJ-IDEA-依赖自动补全插件/">IntellJ IDEA 依赖自动补全插件</a>
           </li>
         
       </ul>

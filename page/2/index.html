@@ -62,16 +62,12 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-Method-Injection-应用" class="article article-type-post" itemscope="" itemprop="blogPost">
+    <article id="post-Spring-一些有用的技巧" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2019/02/22/Method-Injection-应用/" class="article-date">
-  <time datetime="2019-02-22T04:52:00.000Z" itemprop="datePublished">2019-02-22</time>
+    <a href="/2019/02/22/Spring-一些有用的技巧/" class="article-date">
+  <time datetime="2019-02-22T13:38:03.000Z" itemprop="datePublished">2019-02-22</time>
 </a>
     
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/spring/">spring</a>
-  </div>
-
   </div>
   <div class="article-inner">
     
@@ -80,7 +76,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/02/22/Method-Injection-应用/">Method Injection 应用</a>
+      <a class="article-title" href="/2019/02/22/Spring-一些有用的技巧/">Spring 一些有用的技能</a>
     </h1>
   
 
@@ -90,29 +86,23 @@
       
 <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
-        <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#bean作用域"><span class="toc-text">bean作用域</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#引出问题"><span class="toc-text">引出问题</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#例子-Netty-Spring"><span class="toc-text">例子 Netty+Spring</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#DependsOn"><span class="toc-text">@DependsOn</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Profile"><span class="toc-text">@Profile</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Filter"><span class="toc-text">@Filter</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#spring-context-indexer"><span class="toc-text">spring-context-indexer</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#JSR330-VS-Spring-Annotation"><span class="toc-text">JSR330 VS Spring Annotation</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Bean"><span class="toc-text">@Bean</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#循环引用"><span class="toc-text">循环引用</span></a></li></ol>
     </div>
-        <h4 id="bean作用域"><a href="#bean作用域" class="headerlink" title="bean作用域"></a>bean作用域</h4><p>我们都知道Spring IOC是可以帮助我们自动管理bean的依赖关系的，而且bean有几种作用域可根据需要通过@Scope注解设置，如下图<img src="http://pmfilr6j2.bkt.clouddn.com/15508144093970lxwxs8h.png" alt="bean的作用域"></p>
-<h4 id="引出问题"><a href="#引出问题" class="headerlink" title="引出问题"></a>引出问题</h4><p>一般应用中我们都是用singleton作用域，但是有些线程并发情况下可能要使用prototype，但是bean与bean直接是有依赖关系的，原型的bean引用单例的bean按照我们理解的正确方式运行，可是在单例的bean中依赖了原型的bean就会跟我们想的不一样，单例的bean会在容器初始化时被注册到容器中，这里我们不考虑lazy=true情况，该bean所依赖bean也会在被直接注入，但是在使用该单例bean时，容器会直接从缓存中拿出来，并没有机会再次交给容器去从新注入依赖，所以就会出现出乎意料的结果。</p>
-<h4 id="例子-Netty-Spring"><a href="#例子-Netty-Spring" class="headerlink" title="例子 Netty+Spring"></a>例子 Netty+Spring</h4><p>我在实际开发中遇到过这种例子，直接上代码</p>
-<ul>
-<li>@Lookup方式</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Componet</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">ChildChannelInitHandler</span> <span class="keyword">extends</span> <span class="title">ChannelInitializer</span>&lt;<span class="title">SocketChannel</span>&gt; </span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 业务处理线程池，防止业务处理过慢阻塞I/O线程</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> EventLoopGroup group = <span class="keyword">new</span> NioEventLoopGroup();</span><br><span class="line">    <span class="meta">@Resource</span></span><br><span class="line">    <span class="keyword">private</span> DispatcherHandler dispatcherHandler;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">initChannel</span><span class="params">(SocketChannel ch)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        ChannelPipeline pipeline = ch.pipeline();</span><br><span class="line">        pipeline.addLast(<span class="string">"frameDecoder"</span>,createLengthFieldBasedFrameDecoder());</span><br><span class="line">        pipeline.addLast(group,<span class="string">"dispatcherHandler"</span>,dispatcherHandler);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Lookup</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">abstract</span> LengthFieldBasedFrameDecoder <span class="title">createLengthFieldBasedFrameDecoder</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ServerConfig</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Bean</span>(<span class="string">"lengthFieldBasedFrameDecoder"</span>)</span><br><span class="line">    <span class="meta">@Scope</span>(<span class="string">"prototype"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> LengthFieldBasedFrameDecoder <span class="title">createLengthFieldBasedFrameDecoder</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> LengthFieldBasedFrameDecoder(ByteOrder.LITTLE_ENDIAN, ProtocolConstant.MAX_LENGTH,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="keyword">true</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>ChildChannelInitHandler是单例的有main channel调用处理新加入的连接，但是LengthFieldBasedFrameDecoder是线程不安全的，所以不能在netty的child channel pipeline中共享单例的LengthFieldBasedFrameDecoder实例对象，所以需要每次调用initChannel方法时创建一个新的LengthFieldBasedFrameDecoder实例，创建一个类（Spring会自动检查类中是否加了@Lookup，然后生成CGLib代理，目标类是非抽象类也可以，只不过被注解的方法体是不起作用的）使用@Lookup注解方式可以实现不同作用域的bean相互依赖的问题。@Lookup根据方法返回类型进行byType方式注入，如果指定了@Lookup的属性值根据指定的beanName进行注入。<img src="http://pmfilr6j2.bkt.clouddn.com/15508181668144mcv0yy4.png" alt="Lookup注解"></p>
-<ul>
-<li>实现ApplicationContextAware接口方式</li>
-</ul>
-<p>这种方式很简单我就不具体演示了，但是缺点是具有代码侵入性，自己的业务类引用了Spring的API，这种方式其实就是我们之前文章说DI三种注入方式的interface注入</p>
+        <h4 id="DependsOn"><a href="#DependsOn" class="headerlink" title="@DependsOn"></a>@DependsOn</h4><p>spring官方文档上说的很清楚，对于一个bean是另外一个bean的属性的情况属于直接依赖，但是业务中可能还有一些间接依赖，所以需要通过此注解指定，比如一些静态代码块的加载顺序，数据库的加载顺序等，其实这个有点类似于volatile的防止指令重排序的作用<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 线程1执行</span></span><br><span class="line">initContext();</span><br><span class="line"><span class="keyword">volatile</span> <span class="keyword">boolean</span> flag = <span class="keyword">true</span>;</span><br><span class="line"><span class="comment">// 线程2执行</span></span><br><span class="line"><span class="keyword">while</span>(flag)&#123;</span><br><span class="line">	<span class="comment">// 当	</span></span><br><span class="line">	上下文环境初始化好之后执行一些业务</span><br><span class="line">	...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>如果去掉volatile，上边的代码如果被编译器进行指令重排，那么很可能先执行了第三行代码;在执行第二行，如果此时线程1仅仅完成了flag=true，那么线程2执行时必然会存在问题。DependsOn注解的属性值是一个数组，数组元素必须是容器中已经存在的beanName。在一个bean上指定这个注解就可以间接依赖指定的bean，而且在bean销毁时按照相反的顺序销毁。<img src="http://pmfilr6j2.bkt.clouddn.com/1550843517025fqwj5tuf.png" alt="@DependsOn对bean销毁指定相反顺序"></p>
+<h4 id="Profile"><a href="#Profile" class="headerlink" title="@Profile"></a>@Profile</h4><p>这个注解是用来指定配置环境的，即可以通过容器初始化之前set相应的环境，方便开发人员生产/测试/开发环境的切换，而不需要每次手动修改相应的代码来切换环境，比如各种环境下使用不同的数据源。</p>
+<h4 id="Filter"><a href="#Filter" class="headerlink" title="@Filter"></a>@Filter</h4><p>一般在@ComponmentScan中属性中使用，用来包含或排除一些不需要扫描的类。<img src="http://pmfilr6j2.bkt.clouddn.com/15508454082865u2deo20.png" alt="Filter使用的例子"></p>
+<h4 id="spring-context-indexer"><a href="#spring-context-indexer" class="headerlink" title="spring-context-indexer"></a>spring-context-indexer</h4><p>这个jar可以加快一些大型应用的依赖注入，直接通过索引方式而不是classpath扫描，通过在编译期间生成一个spring.components索引文件，来加快依赖注入过程，而且Gradle的不同版本jar依赖的方式有所不同，详细信息可以查看<a href="https://docs.spring.io/spring-framework/docs/current/spring-framework-reference/core.html#beans-scanning-index" target="_blank" rel="noopener">spring官方文档</a></p>
+<h4 id="JSR330-VS-Spring-Annotation"><a href="#JSR330-VS-Spring-Annotation" class="headerlink" title="JSR330 VS Spring Annotation"></a>JSR330 VS Spring Annotation</h4><p>可以直接查看<a href="https://docs.spring.io/spring-framework/docs/current/spring-framework-reference/core.html#beans-standard-annotations" target="_blank" rel="noopener">官方文档</a>，但是有一点需要具体说明，就是关于ObjectFatroy，这个bean被注入的时候，如果想要使用自定义的bean，那么需要使用@Resource方式注解，并且属性名或者是@Resource的name属性指定的是你自定义的beanName，如果找不到beanName，spring会自动注入容器内默认的bean，即相当于在容器默认的DependencyObjectProvider上加了@Primary<img src="http://pmfilr6j2.bkt.clouddn.com/1550886351969w9f4lynd.png" alt="paste image"></p>
+<h4 id="Bean"><a href="#Bean" class="headerlink" title="@Bean"></a>@Bean</h4><p>基于@Bean注解的方法可以有任意多个参数，参数的注入也是容器完成的，与基于构造函数的依赖注入机制类似。</p>
+<h4 id="循环引用"><a href="#循环引用" class="headerlink" title="循环引用"></a>循环引用</h4><p>就是类A有个属性是类B，类B有个属性是类A，解决循环引用思路是先将所有的bean实例化之后放入缓存，不注入依赖，待所有bean实例化完成后，注入依赖，然后清空缓存。但是循环引用对于原型作用域的bean是不可用的。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://y074085024.github.io/2019/02/22/Method-Injection-应用/" data-id="cjsgubng00004s6pvoxfwc2h2" class="article-share-link">Share</a>
+      <a data-url="https://y074085024.github.io/2019/02/22/Spring-一些有用的技巧/" data-id="cjsgun0eo000aszpvnayj40f1" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Lookup/">Lookup</a></li></ul>
-
     </footer>
   </div>
   
@@ -124,7 +114,7 @@
 
 
   <nav id="page-nav">
-<a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
+<a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/">12</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
   </nav>
 
 </section>
@@ -177,6 +167,10 @@
       <ul>
         
           <li>
+            <a href="/2019/02/25/Spring-AOP/">Spring AOP</a>
+          </li>
+        
+          <li>
             <a href="/2019/02/22/Spring-一些有用的技巧/">Spring 一些有用的技能</a>
           </li>
         
@@ -190,10 +184,6 @@
         
           <li>
             <a href="/2019/02/16/手写spring-webmvc/">自己动手写一个spring-webmvc</a>
-          </li>
-        
-          <li>
-            <a href="/2019/02/16/IntellJ-IDEA-依赖自动补全插件/">IntellJ IDEA 依赖自动补全插件</a>
           </li>
         
       </ul>

@@ -62,10 +62,10 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-hello-world" class="article article-type-post" itemscope="" itemprop="blogPost">
+    <article id="post-Hexo-Install" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2019/02/03/hello-world/" class="article-date">
-  <time datetime="2019-02-03T07:51:00.000Z" itemprop="datePublished">2019-02-03</time>
+    <a href="/2019/02/03/Hexo-Install/" class="article-date">
+  <time datetime="2019-02-03T11:20:00.000Z" itemprop="datePublished">2019-02-03</time>
 </a>
     
   </div>
@@ -76,7 +76,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/02/03/hello-world/">Hello World</a>
+      <a class="article-title" href="/2019/02/03/Hexo-Install/">Hexo Install</a>
     </h1>
   
 
@@ -86,22 +86,80 @@
       
 <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Quick-Start"><span class="toc-text">Quick Start</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Create-a-new-post"><span class="toc-text">Create a new post</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Run-server"><span class="toc-text">Run server</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Generate-static-files"><span class="toc-text">Generate static files</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Deploy-to-remote-sites"><span class="toc-text">Deploy to remote sites</span></a></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#hexo介绍"><span class="toc-text">hexo介绍</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#虚拟机安装"><span class="toc-text">虚拟机安装</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#git安装"><span class="toc-text">git安装</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#nodejs安装"><span class="toc-text">nodejs安装</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#hexo安装"><span class="toc-text">hexo安装</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#hexo建站"><span class="toc-text">hexo建站</span></a></li></ol>
     </div>
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+        <h4 id="hexo介绍"><a href="#hexo介绍" class="headerlink" title="hexo介绍"></a>hexo介绍</h4><p><a href="https://hexo.io" target="_blank" rel="noopener">hexo</a>是一个快速、简洁且高效的博客框架</p>
+<h4 id="虚拟机安装"><a href="#虚拟机安装" class="headerlink" title="虚拟机安装"></a>虚拟机安装</h4><ol>
+<li>使用virtualbox创建虚拟机，类型选择Linux，版本选择Red Hat（64-bit）<img src="http://pmfilr6j2.bkt.clouddn.com/1549332432718gna3rn40.png" alt="paste image"></li>
+<li>进入<a href="https://www.centos.org" target="_blank" rel="noopener">centos官网</a>下载最新的64位iso镜像，我下载的是CentOS-7-x86_64-Minimal-1810.iso</li>
+<li>网络选择桥接模式，光驱中选择刚下载的iso文件，启动虚拟机，直接安装，时间选择一下其余默认，并为root用户设置一个密码<img src="http://pmfilr6j2.bkt.clouddn.com/1549332806689phkzy8ti.png" alt="paste image"></li>
+<li>编辑网卡配置文件<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ vi /etc/sysconfig/network-scripts/ifcfg-eth0</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p><img src="http://pmfilr6j2.bkt.clouddn.com/154933309040966845mkm.png" alt="paste image"></p>
+<ol start="5">
+<li><p>重启网卡</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ service network restart</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>查看网络是否可用</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ping www.baidu.com</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>设置静态地址（可选）<img src="http://pmfilr6j2.bkt.clouddn.com/15493333953214mvf9tw4.png" alt="paste image"></p>
+</li>
+<li>查看IP地址<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ip addr</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h4 id="git安装"><a href="#git安装" class="headerlink" title="git安装"></a>git安装</h4><ol>
+<li>使用yum安装git<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ yum install git</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h4 id="nodejs安装"><a href="#nodejs安装" class="headerlink" title="nodejs安装"></a>nodejs安装</h4><ol>
+<li><p><a href="https://github.com/creationix/nvm" target="_blank" rel="noopener">安装nvm</a>（nodejs version manager）</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.34.0/install.sh | bash</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>刷新环境变量</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">source</span> ~/.bash_profile</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>列出可以安装的nodejs的版本</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ nvm list-remote</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>安装指定版本的nodejs</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ nvm install v10.15.1</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>检测安装是否成功</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ node -v</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>查看已安装的nodejs的版本</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ nvm list</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>切换版本</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ nvm use v10.15.1</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>设置默认版本</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ nvm <span class="built_in">alias</span> default v10.15.1</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h4 id="hexo安装"><a href="#hexo安装" class="headerlink" title="hexo安装"></a>hexo安装</h4><ol>
+<li>安装hexo<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install -g hexo-cli</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>如果安装时卡住，先在~/.nvm/.npmrc文件中添加<br>registry = <a href="http://registry.cnpmjs.org" target="_blank" rel="noopener">http://registry.cnpmjs.org</a><br>再进行安装，如果失败可能是网络原因，重试安装</p>
+<ol start="2">
+<li>查看安装是否成功<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo -version</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h4 id="hexo建站"><a href="#hexo建站" class="headerlink" title="hexo建站"></a>hexo建站</h4><ol>
+<li><p>建站</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ hexo init &lt;folder&gt;</span><br><span class="line">$ <span class="built_in">cd</span> &lt;folder&gt;</span><br><span class="line">$ npm install</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>启动</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure></li>
+</ol>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://y074085024.github.io/2019/02/03/hello-world/" data-id="cjsgubngu000es6pvjs4b9vmh" class="article-share-link">Share</a>
+      <a data-url="https://y074085024.github.io/2019/02/03/Hexo-Install/" data-id="cjsgun0dg0000szpv5cxk3bwh" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/">hexo</a></li></ul>
@@ -117,7 +175,7 @@
 
 
   <nav id="page-nav">
-<a class="extend prev" rel="prev" href="/page/10/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="page-number" href="/page/10/">10</a><span class="page-number current">11</span>
+<a class="extend prev" rel="prev" href="/page/10/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="page-number" href="/page/10/">10</a><span class="page-number current">11</span><a class="page-number" href="/page/12/">12</a><a class="extend next" rel="next" href="/page/12/">Next &raquo;</a>
   </nav>
 
 </section>
@@ -170,6 +228,10 @@
       <ul>
         
           <li>
+            <a href="/2019/02/25/Spring-AOP/">Spring AOP</a>
+          </li>
+        
+          <li>
             <a href="/2019/02/22/Spring-一些有用的技巧/">Spring 一些有用的技能</a>
           </li>
         
@@ -183,10 +245,6 @@
         
           <li>
             <a href="/2019/02/16/手写spring-webmvc/">自己动手写一个spring-webmvc</a>
-          </li>
-        
-          <li>
-            <a href="/2019/02/16/IntellJ-IDEA-依赖自动补全插件/">IntellJ IDEA 依赖自动补全插件</a>
           </li>
         
       </ul>
